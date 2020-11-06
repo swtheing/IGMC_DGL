@@ -5,8 +5,7 @@ IGMC -- Inductive Graph-based Matrix Completion
 
 Update
 ------
-8/27/2020: Significantly improved the subgraph extraction speed. With an 8-core machine, now it only takes 30 seconds and 10 minutes to extract subgraphs for ml_100k and ml_1m, respectively. Using --dynamic-dataset also shows about 50% speed-up.
-
+11/6/2020: Recurrence IGMC with DGL. The best performance on flixster dataset is 0.870 (0.872 in original paper). 
 About
 -----
 

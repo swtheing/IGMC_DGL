@@ -6,6 +6,7 @@ IGMC -- Inductive Graph-based Matrix Completion
 Update
 ------
 11/6/2020: Recurrence IGMC with DGL. The best performance on flixster dataset is 0.870 (0.872 in original paper). 
+
 About
 -----
 

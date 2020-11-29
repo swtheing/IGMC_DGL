@@ -1,0 +1,1088 @@
+Using backend: pytorch
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Detected an old version of PyTorch. Suggest using torch>=1.5.0 for the best experience.
+  return warnings.warn(message, category=category, stacklevel=1)
+Namespace(data_name='flixster', data_test_ratio=0.1, data_valid_ratio=0.1, device=device(type='cpu'), gcn_agg_accum='stack', gcn_agg_norm_symm=True, gcn_agg_units=500, gcn_dropout=0.7, gcn_out_units=75, gen_r_num_basis_func=2, model_activation='leaky', save_dir='log/flixster_B7', save_id=7, seed=123, share_param=False, silent=False, train_decay_patience=50, train_early_stopping_patience=100, train_grad_clip=1.0, train_log_interval=1, train_lr=0.01, train_lr_decay_factor=0.5, train_max_iter=2000, train_min_lr=0.001, train_optimizer='adam', train_valid_interval=1, use_one_hot_fea=True)
+Starting processing flixster ...
+(3000, 3000)
+raw_data/flixster/training_test_dataset.mat
+u_nodes:
+[   0    0    0 ... 2996 2998 2998]
+v_nodes:
+[  13  147  669 ... 2336  117  591]
+user Features:
+[[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+User features shape: (3000, 3000)
+Item Features
+[[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+Item features shape: (3000, 3000)
+train_labels: 23556
+[6 6 9 ... 6 5 7]
+u_train_idx: 23556
+[1005 2476   22 ... 1516  977   61]
+v_train_idx: 23556
+[ 463 2098  566 ...  399  285 2186]
+test_labels: 2617
+[5 9 7 ... 8 2 4]
+u_test_idx: 2617
+[   2    3    3 ... 2995 2995 2995]
+v_test_idx: 2617
+[ 534  364  443 ...   80  179 1666]
+class_values: 10
+[0.5 1.  1.5 2.  2.5 3.  3.5 4.  4.5 5. ]
+number of users =  2341
+number of items =  2956
+train size 23556 , test size 2617 , all size 26173
+train u_size 23556 v_size 23556; test u_size 2617 v_size 2617; 
+......
+All rating pairs : 26173
+	All train rating pairs : 23556
+		Train rating pairs : 21200
+		Valid rating pairs : 2356
+	Test rating pairs  : 2617
+user and item number:
+2341
+2956
+Total user number = 2341, movie number = 2956
+Feature dim: 
+user: (2341, 2341)
+movie: (2956, 2956)
+v: 0.0
+v: 1.0
+v: 2.0
+v: 3.0
+v: 4.0
+v: 5.0
+v: 6.0
+v: 7.0
+v: 8.0
+v: 9.0
+enc graph AAA
+21200
+42400
+v: 0.0
+v: 1.0
+v: 2.0
+v: 3.0
+v: 4.0
+v: 5.0
+v: 6.0
+v: 7.0
+v: 8.0
+v: 9.0
+enc graph AAA
+23556
+47112
+Train enc graph: 	#user:2341	#movie:2956	#pairs:21200
+Train dec graph: 	#user:2341	#movie:2956	#pairs:21200
+Valid enc graph: 	#user:2341	#movie:2956	#pairs:21200
+Valid dec graph: 	#user:2341	#movie:2956	#pairs:2356
+Test enc graph: 	#user:2341	#movie:2956	#pairs:23556
+Test dec graph: 	#user:2341	#movie:2956	#pairs:2617
+Loading data finished ...
+
+AGG STACK
+10
+500
+Loading network finished ...
+
+Start training ...
+Total #Param of net: 2734920
+Total Param Number: 2734920
+Params:
+	encoder.ufc.weight: torch.Size([75, 500]), 37500
+	encoder.ufc.bias: torch.Size([75]), 75
+	encoder.ifc.weight: torch.Size([75, 500]), 37500
+	encoder.ifc.bias: torch.Size([75]), 75
+	encoder.conv.mods.0_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.1_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.2_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.3_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.4_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.5_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.6_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.7_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.8_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.9_0.weight: torch.Size([2341, 50]), 117050
+	encoder.conv.mods.rev-0_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-1_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-2_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-3_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-4_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-5_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-6_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-7_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-8_0.weight: torch.Size([2956, 50]), 147800
+	encoder.conv.mods.rev-9_0.weight: torch.Size([2956, 50]), 147800
+	decoder.Ps.0: torch.Size([75, 75]), 5625
+	decoder.Ps.1: torch.Size([75, 75]), 5625
+	decoder.combine_basis.weight: torch.Size([10, 2]), 20
+Net(
+  (_act): LeakyReLU(negative_slope=0.1)
+  (encoder): GCMCLayer(
+    (ufc): Linear(in_features=500, out_features=75, bias=True)
+    (ifc): Linear(in_features=500, out_features=75, bias=True)
+    (dropout): Dropout(p=0.7, inplace=False)
+    (W_r): None
+    (conv): HeteroGraphConv(
+      (mods): ModuleDict(
+        (0_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (1_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (2_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (3_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (4_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (5_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (6_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (7_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (8_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (9_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-0_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-1_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-2_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-3_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-4_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-5_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-6_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-7_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-8_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-9_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+      )
+    )
+    (agg_act): LeakyReLU(negative_slope=0.1)
+  )
+  (decoder): BiDecoder(
+    (dropout): Dropout(p=0.0, inplace=False)
+    (Ps): ParameterList(
+        (0): Parameter containing: [torch.FloatTensor of size 75x75]
+        (1): Parameter containing: [torch.FloatTensor of size 75x75]
+    )
+    (combine_basis): Linear(in_features=2, out_features=10, bias=False)
+  )
+)
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/numpy/lib/function_base.py:393: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis)
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/numpy/core/_methods.py:161: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=1, loss=2.3028, rmse=8.5183, time=nan,	Val RMSE=2.8683, Test RMSE=2.8629
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=2, loss=2.2983, rmse=8.3587, time=nan,	Val RMSE=2.8208, Test RMSE=2.8161
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=3, loss=2.2920, rmse=8.0507, time=nan,	Val RMSE=2.7284, Test RMSE=2.7253
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=4, loss=2.2840, rmse=7.4663, time=0.1988,	Val RMSE=2.5866, Test RMSE=2.5866
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=5, loss=2.2764, rmse=6.5737, time=0.2013,	Val RMSE=2.5230, Test RMSE=2.5255
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=6, loss=2.2673, rmse=6.1953, time=0.2002,	Val RMSE=2.5068, Test RMSE=2.5111
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=7, loss=2.2572, rmse=6.1403, time=0.1986,	Val RMSE=2.4928, Test RMSE=2.4985
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=8, loss=2.2461, rmse=6.1190, time=0.1998,	Val RMSE=2.4312, Test RMSE=2.4381
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=9, loss=2.2358, rmse=5.8946, time=0.1999,	Val RMSE=2.3218, Test RMSE=2.3299
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=10, loss=2.2262, rmse=5.3465, time=0.1998,	Val RMSE=2.2286, Test RMSE=2.2382
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=11, loss=2.2176, rmse=4.9682, time=0.1998,	Val RMSE=2.1901, Test RMSE=2.2031
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=12, loss=2.2085, rmse=4.7582, time=0.1997,	Val RMSE=2.2039
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=13, loss=2.1990, rmse=4.8796, time=0.2001,	Val RMSE=2.2361
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=14, loss=2.1907, rmse=5.0474, time=0.1995,	Val RMSE=2.2619
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=15, loss=2.1820, rmse=5.0512, time=0.1995,	Val RMSE=2.2470
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=16, loss=2.1741, rmse=5.0107, time=0.2000,	Val RMSE=2.1962
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=17, loss=2.1662, rmse=4.7640, time=0.2032,	Val RMSE=2.1394, Test RMSE=2.1706
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=18, loss=2.1585, rmse=4.6036, time=0.2050,	Val RMSE=2.1102, Test RMSE=2.1409
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=19, loss=2.1510, rmse=4.3881, time=0.2050,	Val RMSE=2.1245
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=20, loss=2.1435, rmse=4.4020, time=0.2053,	Val RMSE=2.1619
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=21, loss=2.1365, rmse=4.5953, time=0.2053,	Val RMSE=2.1664
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=22, loss=2.1300, rmse=4.5307, time=0.2055,	Val RMSE=2.1450
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=23, loss=2.1240, rmse=4.5040, time=0.2053,	Val RMSE=2.1038, Test RMSE=2.1274
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=24, loss=2.1183, rmse=4.3582, time=0.2062,	Val RMSE=2.0660, Test RMSE=2.0906
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=25, loss=2.1123, rmse=4.1619, time=0.2058,	Val RMSE=2.0435, Test RMSE=2.0697
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=26, loss=2.1065, rmse=4.0622, time=0.2056,	Val RMSE=2.0310, Test RMSE=2.0582
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=27, loss=2.1008, rmse=3.9246, time=0.2056,	Val RMSE=2.0400
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=28, loss=2.0955, rmse=3.9595, time=0.2054,	Val RMSE=2.0544
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=29, loss=2.0904, rmse=4.0247, time=0.2051,	Val RMSE=2.0447
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=30, loss=2.0853, rmse=3.9495, time=0.2047,	Val RMSE=2.0204, Test RMSE=2.0518
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=31, loss=2.0803, rmse=3.8612, time=0.2046,	Val RMSE=2.0005, Test RMSE=2.0331
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=32, loss=2.0758, rmse=3.8342, time=0.2044,	Val RMSE=1.9906, Test RMSE=2.0241
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=33, loss=2.0710, rmse=3.7895, time=0.2044,	Val RMSE=1.9820, Test RMSE=2.0156
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=34, loss=2.0666, rmse=3.8106, time=0.2042,	Val RMSE=1.9757, Test RMSE=2.0097
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=35, loss=2.0620, rmse=3.6906, time=0.2041,	Val RMSE=1.9771
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=36, loss=2.0576, rmse=3.7031, time=0.2039,	Val RMSE=1.9705, Test RMSE=2.0065
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=37, loss=2.0532, rmse=3.5432, time=0.2038,	Val RMSE=1.9640, Test RMSE=2.0013
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=38, loss=2.0490, rmse=3.6126, time=0.2037,	Val RMSE=1.9395, Test RMSE=1.9774
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=39, loss=2.0449, rmse=3.5096, time=0.2038,	Val RMSE=1.9091, Test RMSE=1.9467
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=40, loss=2.0408, rmse=3.4740, time=0.2063,	Val RMSE=1.8824, Test RMSE=1.9190
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=41, loss=2.0368, rmse=3.2894, time=0.2077,	Val RMSE=1.8939
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=42, loss=2.0327, rmse=3.2801, time=0.2085,	Val RMSE=1.9149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=43, loss=2.0288, rmse=3.4835, time=0.2093,	Val RMSE=1.9025
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=44, loss=2.0248, rmse=3.3286, time=0.2099,	Val RMSE=1.8853
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=45, loss=2.0209, rmse=3.3071, time=0.2101,	Val RMSE=1.8613, Test RMSE=1.8882
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=46, loss=2.0171, rmse=3.1791, time=0.2097,	Val RMSE=1.8561, Test RMSE=1.8825
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=47, loss=2.0133, rmse=3.1959, time=0.2097,	Val RMSE=1.8540, Test RMSE=1.8798
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=48, loss=2.0096, rmse=3.1868, time=0.2097,	Val RMSE=1.8466, Test RMSE=1.8721
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=49, loss=2.0060, rmse=3.1580, time=0.2107,	Val RMSE=1.8309, Test RMSE=1.8564
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=50, loss=2.0022, rmse=3.0204, time=0.2107,	Val RMSE=1.8184, Test RMSE=1.8433
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=51, loss=1.9985, rmse=3.0545, time=0.2105,	Val RMSE=1.8191
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=52, loss=1.9950, rmse=3.0077, time=0.2102,	Val RMSE=1.8230
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=53, loss=1.9916, rmse=3.0623, time=0.2100,	Val RMSE=1.8220
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=54, loss=1.9881, rmse=3.0089, time=0.2098,	Val RMSE=1.8182, Test RMSE=1.8387
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=55, loss=1.9845, rmse=2.9752, time=0.2096,	Val RMSE=1.8111, Test RMSE=1.8332
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=56, loss=1.9812, rmse=2.9441, time=0.2096,	Val RMSE=1.8089, Test RMSE=1.8329
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=57, loss=1.9778, rmse=2.9488, time=0.2099,	Val RMSE=1.8062, Test RMSE=1.8309
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=58, loss=1.9744, rmse=2.8881, time=0.2107,	Val RMSE=1.8048, Test RMSE=1.8292
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=59, loss=1.9711, rmse=2.8656, time=0.2109,	Val RMSE=1.8001, Test RMSE=1.8226
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=60, loss=1.9677, rmse=2.9069, time=0.2114,	Val RMSE=1.7963, Test RMSE=1.8161
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=61, loss=1.9643, rmse=2.8513, time=0.2114,	Val RMSE=1.7956, Test RMSE=1.8132
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=62, loss=1.9610, rmse=2.8901, time=0.2117,	Val RMSE=1.7938, Test RMSE=1.8116
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=63, loss=1.9577, rmse=2.8362, time=0.2125,	Val RMSE=1.7916, Test RMSE=1.8104
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=64, loss=1.9546, rmse=2.8839, time=0.2122,	Val RMSE=1.7905, Test RMSE=1.8104
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=65, loss=1.9513, rmse=2.8190, time=0.2121,	Val RMSE=1.7922
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=66, loss=1.9481, rmse=2.7982, time=0.2123,	Val RMSE=1.7946
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=67, loss=1.9450, rmse=2.8209, time=0.2126,	Val RMSE=1.7937
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=68, loss=1.9420, rmse=2.8703, time=0.2126,	Val RMSE=1.7933
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=69, loss=1.9391, rmse=2.8260, time=0.2126,	Val RMSE=1.7925
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=70, loss=1.9362, rmse=2.8280, time=0.2124,	Val RMSE=1.7911
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=71, loss=1.9331, rmse=2.7490, time=0.2128,	Val RMSE=1.7908
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=72, loss=1.9302, rmse=2.8062, time=0.2128,	Val RMSE=1.7856, Test RMSE=1.8069
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=73, loss=1.9273, rmse=2.7848, time=0.2128,	Val RMSE=1.7850, Test RMSE=1.8049
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=74, loss=1.9246, rmse=2.8069, time=0.2126,	Val RMSE=1.7857
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=75, loss=1.9217, rmse=2.8013, time=0.2125,	Val RMSE=1.7852
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=76, loss=1.9190, rmse=2.8284, time=0.2126,	Val RMSE=1.7861
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=77, loss=1.9163, rmse=2.7726, time=0.2127,	Val RMSE=1.7867
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=78, loss=1.9136, rmse=2.7743, time=0.2127,	Val RMSE=1.7882
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=79, loss=1.9111, rmse=2.7611, time=0.2125,	Val RMSE=1.7886
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=80, loss=1.9085, rmse=2.7738, time=0.2123,	Val RMSE=1.7898
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=81, loss=1.9060, rmse=2.7885, time=0.2122,	Val RMSE=1.7923
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=82, loss=1.9035, rmse=2.8008, time=0.2121,	Val RMSE=1.7919
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=83, loss=1.9010, rmse=2.8061, time=0.2122,	Val RMSE=1.7918
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=84, loss=1.8986, rmse=2.7668, time=0.2121,	Val RMSE=1.7927
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=85, loss=1.8962, rmse=2.8120, time=0.2120,	Val RMSE=1.7937
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=86, loss=1.8938, rmse=2.7339, time=0.2118,	Val RMSE=1.7936
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=87, loss=1.8914, rmse=2.7694, time=0.2117,	Val RMSE=1.7904
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=88, loss=1.8891, rmse=2.7615, time=0.2116,	Val RMSE=1.7892
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=89, loss=1.8868, rmse=2.7349, time=0.2115,	Val RMSE=1.7877
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=90, loss=1.8845, rmse=2.7368, time=0.2114,	Val RMSE=1.7857
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=91, loss=1.8822, rmse=2.7539, time=0.2113,	Val RMSE=1.7865
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=92, loss=1.8801, rmse=2.7702, time=0.2111,	Val RMSE=1.7899
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=93, loss=1.8779, rmse=2.7511, time=0.2110,	Val RMSE=1.7965
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=94, loss=1.8757, rmse=2.6832, time=0.2109,	Val RMSE=1.7998
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=95, loss=1.8736, rmse=2.7738, time=0.2108,	Val RMSE=1.8001
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=96, loss=1.8716, rmse=2.7640, time=0.2108,	Val RMSE=1.7963
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=97, loss=1.8695, rmse=2.6984, time=0.2107,	Val RMSE=1.7929
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=98, loss=1.8674, rmse=2.6941, time=0.2107,	Val RMSE=1.7917
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=99, loss=1.8654, rmse=2.7131, time=0.2106,	Val RMSE=1.7928
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=100, loss=1.8633, rmse=2.7050, time=0.2106,	Val RMSE=1.7925
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=101, loss=1.8613, rmse=2.6743, time=0.2107,	Val RMSE=1.7943
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=102, loss=1.8593, rmse=2.7089, time=0.2106,	Val RMSE=1.7965
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=103, loss=1.8575, rmse=2.7458, time=0.2106,	Val RMSE=1.7967
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=104, loss=1.8555, rmse=2.7156, time=0.2104,	Val RMSE=1.7933
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=105, loss=1.8536, rmse=2.7090, time=0.2103,	Val RMSE=1.7876
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=106, loss=1.8517, rmse=2.6850, time=0.2102,	Val RMSE=1.7839, Test RMSE=1.8018
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=107, loss=1.8498, rmse=2.6713, time=0.2101,	Val RMSE=1.7838, Test RMSE=1.8035
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=108, loss=1.8479, rmse=2.6396, time=0.2100,	Val RMSE=1.7856
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=109, loss=1.8463, rmse=2.6590, time=0.2099,	Val RMSE=1.7884
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=110, loss=1.8445, rmse=2.6664, time=0.2098,	Val RMSE=1.7907
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=111, loss=1.8427, rmse=2.6467, time=0.2098,	Val RMSE=1.7923
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=112, loss=1.8409, rmse=2.6291, time=0.2097,	Val RMSE=1.7925
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=113, loss=1.8392, rmse=2.6740, time=0.2096,	Val RMSE=1.7907
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=114, loss=1.8375, rmse=2.6451, time=0.2105,	Val RMSE=1.7892
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=115, loss=1.8359, rmse=2.7252, time=0.2106,	Val RMSE=1.7893
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=116, loss=1.8342, rmse=2.6555, time=0.2105,	Val RMSE=1.7900
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=117, loss=1.8325, rmse=2.6234, time=0.2107,	Val RMSE=1.7922
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=118, loss=1.8308, rmse=2.6006, time=0.2108,	Val RMSE=1.7923
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=119, loss=1.8292, rmse=2.6261, time=0.2108,	Val RMSE=1.7933
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=120, loss=1.8276, rmse=2.6150, time=0.2107,	Val RMSE=1.7952
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=121, loss=1.8260, rmse=2.6226, time=0.2106,	Val RMSE=1.7964
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=122, loss=1.8245, rmse=2.6231, time=0.2116,	Val RMSE=1.7985
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=123, loss=1.8229, rmse=2.6057, time=0.2117,	Val RMSE=1.7988
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=124, loss=1.8213, rmse=2.5986, time=0.2116,	Val RMSE=1.7967
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=125, loss=1.8199, rmse=2.6048, time=0.2115,	Val RMSE=1.7957
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=126, loss=1.8184, rmse=2.6385, time=0.2115,	Val RMSE=1.7958
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=127, loss=1.8169, rmse=2.6146, time=0.2114,	Val RMSE=1.8007
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=128, loss=1.8154, rmse=2.6197, time=0.2113,	Val RMSE=1.8058
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=129, loss=1.8140, rmse=2.6035, time=0.2113,	Val RMSE=1.8008
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=130, loss=1.8125, rmse=2.5997, time=0.2112,	Val RMSE=1.7938
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=131, loss=1.8110, rmse=2.5751, time=0.2120,	Val RMSE=1.7923
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=132, loss=1.8095, rmse=2.5754, time=0.2119,	Val RMSE=1.7950
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=133, loss=1.8081, rmse=2.5882, time=0.2118,	Val RMSE=1.7987
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=134, loss=1.8067, rmse=2.6075, time=0.2118,	Val RMSE=1.8008
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=135, loss=1.8053, rmse=2.5862, time=0.2119,	Val RMSE=1.7992
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=136, loss=1.8039, rmse=2.5817, time=0.2118,	Val RMSE=1.7969
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=137, loss=1.8026, rmse=2.5491, time=0.2117,	Val RMSE=1.7961
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=138, loss=1.8012, rmse=2.5889, time=0.2116,	Val RMSE=1.7956
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=139, loss=1.7998, rmse=2.5443, time=0.2116,	Val RMSE=1.7950
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=140, loss=1.7985, rmse=2.5694, time=0.2116,	Val RMSE=1.7951
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=141, loss=1.7972, rmse=2.5488, time=0.2115,	Val RMSE=1.7980
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=142, loss=1.7959, rmse=2.5766, time=0.2114,	Val RMSE=1.8009
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=143, loss=1.7946, rmse=2.5715, time=0.2114,	Val RMSE=1.8015
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=144, loss=1.7933, rmse=2.5543, time=0.2113,	Val RMSE=1.7998
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=145, loss=1.7920, rmse=2.5230, time=0.2112,	Val RMSE=1.7987
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=146, loss=1.7907, rmse=2.5236, time=0.2112,	Val RMSE=1.7971
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=147, loss=1.7894, rmse=2.5509, time=0.2111,	Val RMSE=1.7988
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=148, loss=1.7882, rmse=2.5303, time=0.2111,	Val RMSE=1.8025
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=149, loss=1.7871, rmse=2.5555, time=0.2111,	Val RMSE=1.8019
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=150, loss=1.7859, rmse=2.5563, time=0.2110,	Val RMSE=1.8009
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=151, loss=1.7847, rmse=2.5702, time=0.2110,	Val RMSE=1.8038
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=152, loss=1.7835, rmse=2.5559, time=0.2110,	Val RMSE=1.8070
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=153, loss=1.7824, rmse=2.5549, time=0.2109,	Val RMSE=1.8063
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=154, loss=1.7812, rmse=2.5363, time=0.2108,	Val RMSE=1.8043
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=155, loss=1.7800, rmse=2.5303, time=0.2107,	Val RMSE=1.8028
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=156, loss=1.7788, rmse=2.5312, time=0.2107,	Val RMSE=1.8012
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=157, loss=1.7776, rmse=2.5399, time=0.2105,	Val RMSE=1.8010
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=158, loss=1.7765, rmse=2.5581, time=0.2106,	Val RMSE=1.8044
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=159, loss=1.7754, rmse=2.5649, time=0.2106,	Val RMSE=1.8068
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=160, loss=1.7743, rmse=2.5308, time=0.2106,	Val RMSE=1.8086
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=161, loss=1.7732, rmse=2.5559, time=0.2105,	Val RMSE=1.8096
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=162, loss=1.7721, rmse=2.4988, time=0.2105,	Val RMSE=1.8095
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=163, loss=1.7710, rmse=2.5105, time=0.2104,	Val RMSE=1.8088
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=164, loss=1.7699, rmse=2.5402, time=0.2104,	Val RMSE=1.8070
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=165, loss=1.7688, rmse=2.5275, time=0.2104,	Val RMSE=1.8043
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=166, loss=1.7678, rmse=2.5120, time=0.2103,	Val RMSE=1.8025
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=167, loss=1.7667, rmse=2.5030, time=0.2102,	Val RMSE=1.8015
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=168, loss=1.7656, rmse=2.4827, time=0.2101,	Val RMSE=1.8018
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=169, loss=1.7647, rmse=2.5164, time=0.2101,	Val RMSE=1.8040
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=170, loss=1.7636, rmse=2.4825, time=0.2101,	Val RMSE=1.8064
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=171, loss=1.7626, rmse=2.5315, time=0.2101,	Val RMSE=1.8069
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=172, loss=1.7616, rmse=2.4764, time=0.2102,	Val RMSE=1.8062
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=173, loss=1.7605, rmse=2.5121, time=0.2102,	Val RMSE=1.8051
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=174, loss=1.7595, rmse=2.4498, time=0.2101,	Val RMSE=1.8042
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=175, loss=1.7585, rmse=2.4943, time=0.2101,	Val RMSE=1.8031
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=176, loss=1.7575, rmse=2.4736, time=0.2100,	Val RMSE=1.8020
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=177, loss=1.7564, rmse=2.4632, time=0.2100,	Val RMSE=1.8003
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=178, loss=1.7555, rmse=2.4691, time=0.2099,	Val RMSE=1.7996
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=179, loss=1.7545, rmse=2.4809, time=0.2098,	Val RMSE=1.8009
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=180, loss=1.7535, rmse=2.4372, time=0.2098,	Val RMSE=1.8026
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=181, loss=1.7525, rmse=2.5134, time=0.2097,	Val RMSE=1.8020
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=182, loss=1.7516, rmse=2.4791, time=0.2097,	Val RMSE=1.8002
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=183, loss=1.7506, rmse=2.4473, time=0.2096,	Val RMSE=1.7991
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=184, loss=1.7496, rmse=2.4275, time=0.2096,	Val RMSE=1.7999
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=185, loss=1.7487, rmse=2.4429, time=0.2095,	Val RMSE=1.8020
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=186, loss=1.7477, rmse=2.4571, time=0.2096,	Val RMSE=1.8045
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=187, loss=1.7468, rmse=2.4253, time=0.2097,	Val RMSE=1.8070
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=188, loss=1.7458, rmse=2.4710, time=0.2097,	Val RMSE=1.8082
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=189, loss=1.7449, rmse=2.4392, time=0.2097,	Val RMSE=1.8079
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=190, loss=1.7439, rmse=2.4865, time=0.2096,	Val RMSE=1.8079
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=191, loss=1.7431, rmse=2.4779, time=0.2096,	Val RMSE=1.8071
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=192, loss=1.7421, rmse=2.4103, time=0.2096,	Val RMSE=1.8071
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=193, loss=1.7412, rmse=2.4222, time=0.2096,	Val RMSE=1.8072
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=194, loss=1.7403, rmse=2.4913, time=0.2096,	Val RMSE=1.8067
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=195, loss=1.7395, rmse=2.4580, time=0.2095,	Val RMSE=1.8067
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=196, loss=1.7386, rmse=2.4438, time=0.2095,	Val RMSE=1.8068
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=197, loss=1.7378, rmse=2.4784, time=0.2094,	Val RMSE=1.8069
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=198, loss=1.7369, rmse=2.4312, time=0.2093,	Val RMSE=1.8064
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=199, loss=1.7360, rmse=2.4323, time=0.2094,	Val RMSE=1.8060
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=200, loss=1.7352, rmse=2.4160, time=0.2093,	Val RMSE=1.8075
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=201, loss=1.7343, rmse=2.3567, time=0.2093,	Val RMSE=1.8088
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=202, loss=1.7334, rmse=2.4127, time=0.2092,	Val RMSE=1.8090
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=203, loss=1.7326, rmse=2.4404, time=0.2092,	Val RMSE=1.8088
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=204, loss=1.7318, rmse=2.4464, time=0.2092,	Val RMSE=1.8080
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=205, loss=1.7309, rmse=2.4249, time=0.2091,	Val RMSE=1.8066
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=206, loss=1.7301, rmse=2.4332, time=0.2091,	Val RMSE=1.8048
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=207, loss=1.7293, rmse=2.3802, time=0.2090,	Val RMSE=1.8044
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=208, loss=1.7285, rmse=2.4545, time=0.2090,	Val RMSE=1.8045
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=209, loss=1.7277, rmse=2.4269, time=0.2089,	Val RMSE=1.8047
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=210, loss=1.7269, rmse=2.4220, time=0.2088,	Val RMSE=1.8047
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=211, loss=1.7261, rmse=2.4174, time=0.2088,	Val RMSE=1.8041
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=212, loss=1.7253, rmse=2.4116, time=0.2088,	Val RMSE=1.8037
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=213, loss=1.7245, rmse=2.3824, time=0.2087,	Val RMSE=1.8035
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=214, loss=1.7237, rmse=2.4068, time=0.2087,	Val RMSE=1.8044
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=215, loss=1.7229, rmse=2.4462, time=0.2086,	Val RMSE=1.8054
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=216, loss=1.7222, rmse=2.4409, time=0.2086,	Val RMSE=1.8061
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=217, loss=1.7214, rmse=2.3763, time=0.2085,	Val RMSE=1.8069
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=218, loss=1.7206, rmse=2.3833, time=0.2085,	Val RMSE=1.8069
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=219, loss=1.7198, rmse=2.3729, time=0.2085,	Val RMSE=1.8070
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=220, loss=1.7191, rmse=2.4110, time=0.2085,	Val RMSE=1.8073
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=221, loss=1.7183, rmse=2.3851, time=0.2085,	Val RMSE=1.8078
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=222, loss=1.7176, rmse=2.3981, time=0.2084,	Val RMSE=1.8081
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=223, loss=1.7168, rmse=2.4410, time=0.2087,	Val RMSE=1.8081
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=224, loss=1.7160, rmse=2.3554, time=0.2088,	Val RMSE=1.8081
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=225, loss=1.7153, rmse=2.4091, time=0.2088,	Val RMSE=1.8081
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=226, loss=1.7146, rmse=2.4041, time=0.2088,	Val RMSE=1.8080
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=227, loss=1.7139, rmse=2.4516, time=0.2087,	Val RMSE=1.8070
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=228, loss=1.7131, rmse=2.3708, time=0.2087,	Val RMSE=1.8066
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=229, loss=1.7124, rmse=2.3343, time=0.2087,	Val RMSE=1.8066
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=230, loss=1.7117, rmse=2.4324, time=0.2087,	Val RMSE=1.8067
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=231, loss=1.7110, rmse=2.3605, time=0.2087,	Val RMSE=1.8067
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=232, loss=1.7103, rmse=2.3925, time=0.2087,	Val RMSE=1.8067
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=233, loss=1.7096, rmse=2.3659, time=0.2086,	Val RMSE=1.8069
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=234, loss=1.7089, rmse=2.3907, time=0.2086,	Val RMSE=1.8072
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=235, loss=1.7082, rmse=2.4000, time=0.2087,	Val RMSE=1.8078
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=236, loss=1.7075, rmse=2.3599, time=0.2087,	Val RMSE=1.8082
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=237, loss=1.7068, rmse=2.4236, time=0.2087,	Val RMSE=1.8092
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=238, loss=1.7061, rmse=2.3352, time=0.2086,	Val RMSE=1.8097
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=239, loss=1.7054, rmse=2.3538, time=0.2087,	Val RMSE=1.8104
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=240, loss=1.7047, rmse=2.3883, time=0.2087,	Val RMSE=1.8112
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=241, loss=1.7040, rmse=2.3652, time=0.2087,	Val RMSE=1.8119
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=242, loss=1.7033, rmse=2.3765, time=0.2086,	Val RMSE=1.8120
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=243, loss=1.7027, rmse=2.3798, time=0.2086,	Val RMSE=1.8122
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=244, loss=1.7020, rmse=2.3669, time=0.2086,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=245, loss=1.7014, rmse=2.3881, time=0.2086,	Val RMSE=1.8131
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=246, loss=1.7007, rmse=2.3741, time=0.2085,	Val RMSE=1.8134
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=247, loss=1.7001, rmse=2.4145, time=0.2085,	Val RMSE=1.8140
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=248, loss=1.6995, rmse=2.3628, time=0.2085,	Val RMSE=1.8140
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=249, loss=1.6988, rmse=2.3777, time=0.2084,	Val RMSE=1.8134
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=250, loss=1.6982, rmse=2.3832, time=0.2084,	Val RMSE=1.8127
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=251, loss=1.6976, rmse=2.3310, time=0.2084,	Val RMSE=1.8121
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=252, loss=1.6969, rmse=2.3750, time=0.2084,	Val RMSE=1.8114
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=253, loss=1.6963, rmse=2.3528, time=0.2084,	Val RMSE=1.8109
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=254, loss=1.6957, rmse=2.3547, time=0.2084,	Val RMSE=1.8103
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=255, loss=1.6951, rmse=2.3585, time=0.2084,	Val RMSE=1.8101
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=256, loss=1.6945, rmse=2.3417, time=0.2084,	Val RMSE=1.8100
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=257, loss=1.6939, rmse=2.3807, time=0.2084,	Val RMSE=1.8102
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=258, loss=1.6933, rmse=2.3309, time=0.2085,	Val RMSE=1.8104
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=259, loss=1.6927, rmse=2.3819, time=0.2085,	Val RMSE=1.8112
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=260, loss=1.6921, rmse=2.3630, time=0.2084,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=261, loss=1.6915, rmse=2.3689, time=0.2086,	Val RMSE=1.8132
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=262, loss=1.6909, rmse=2.3499, time=0.2086,	Val RMSE=1.8134
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=263, loss=1.6903, rmse=2.3670, time=0.2087,	Val RMSE=1.8134
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=264, loss=1.6898, rmse=2.3719, time=0.2087,	Val RMSE=1.8134
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=265, loss=1.6892, rmse=2.3570, time=0.2086,	Val RMSE=1.8132
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=266, loss=1.6886, rmse=2.3578, time=0.2087,	Val RMSE=1.8129
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=267, loss=1.6880, rmse=2.3516, time=0.2087,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=268, loss=1.6875, rmse=2.3554, time=0.2088,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=269, loss=1.6869, rmse=2.3493, time=0.2088,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=270, loss=1.6864, rmse=2.3746, time=0.2088,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=271, loss=1.6858, rmse=2.3281, time=0.2087,	Val RMSE=1.8129
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=272, loss=1.6852, rmse=2.3448, time=0.2088,	Val RMSE=1.8127
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=273, loss=1.6847, rmse=2.3686, time=0.2088,	Val RMSE=1.8124
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=274, loss=1.6841, rmse=2.3234, time=0.2089,	Val RMSE=1.8120
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=275, loss=1.6836, rmse=2.3899, time=0.2089,	Val RMSE=1.8117
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=276, loss=1.6831, rmse=2.3664, time=0.2089,	Val RMSE=1.8115
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=277, loss=1.6825, rmse=2.3248, time=0.2089,	Val RMSE=1.8112
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=278, loss=1.6820, rmse=2.3772, time=0.2090,	Val RMSE=1.8110
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=279, loss=1.6815, rmse=2.3564, time=0.2090,	Val RMSE=1.8111
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=280, loss=1.6810, rmse=2.3250, time=0.2090,	Val RMSE=1.8110
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=281, loss=1.6804, rmse=2.3347, time=0.2091,	Val RMSE=1.8110
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=282, loss=1.6799, rmse=2.3814, time=0.2091,	Val RMSE=1.8112
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=283, loss=1.6794, rmse=2.3651, time=0.2091,	Val RMSE=1.8114
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=284, loss=1.6789, rmse=2.3501, time=0.2091,	Val RMSE=1.8113
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=285, loss=1.6784, rmse=2.3114, time=0.2092,	Val RMSE=1.8113
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=286, loss=1.6779, rmse=2.3679, time=0.2092,	Val RMSE=1.8117
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=287, loss=1.6774, rmse=2.3976, time=0.2093,	Val RMSE=1.8122
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=288, loss=1.6769, rmse=2.3408, time=0.2094,	Val RMSE=1.8127
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=289, loss=1.6764, rmse=2.3451, time=0.2094,	Val RMSE=1.8130
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=290, loss=1.6759, rmse=2.3436, time=0.2094,	Val RMSE=1.8131
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=291, loss=1.6753, rmse=2.3419, time=0.2094,	Val RMSE=1.8136
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=292, loss=1.6748, rmse=2.3333, time=0.2095,	Val RMSE=1.8141
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=293, loss=1.6744, rmse=2.4022, time=0.2094,	Val RMSE=1.8145
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=294, loss=1.6739, rmse=2.3846, time=0.2094,	Val RMSE=1.8149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=295, loss=1.6734, rmse=2.3386, time=0.2095,	Val RMSE=1.8154
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=296, loss=1.6729, rmse=2.3360, time=0.2096,	Val RMSE=1.8158
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=297, loss=1.6724, rmse=2.3488, time=0.2096,	Val RMSE=1.8159
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=298, loss=1.6720, rmse=2.3144, time=0.2096,	Val RMSE=1.8158
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=299, loss=1.6715, rmse=2.3275, time=0.2096,	Val RMSE=1.8160
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=300, loss=1.6710, rmse=2.3035, time=0.2096,	Val RMSE=1.8161
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=301, loss=1.6705, rmse=2.3348, time=0.2099,	Val RMSE=1.8160
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=302, loss=1.6700, rmse=2.3646, time=0.2099,	Val RMSE=1.8154
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=303, loss=1.6695, rmse=2.3221, time=0.2099,	Val RMSE=1.8146
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=304, loss=1.6691, rmse=2.3716, time=0.2099,	Val RMSE=1.8140
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=305, loss=1.6686, rmse=2.3350, time=0.2099,	Val RMSE=1.8133
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=306, loss=1.6682, rmse=2.3322, time=0.2102,	Val RMSE=1.8129
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=307, loss=1.6677, rmse=2.2994, time=0.2102,	Val RMSE=1.8123
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=308, loss=1.6672, rmse=2.3157, time=0.2102,	Val RMSE=1.8121
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=309, loss=1.6667, rmse=2.3057, time=0.2102,	Val RMSE=1.8122
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=310, loss=1.6663, rmse=2.2998, time=0.2102,	Val RMSE=1.8126
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=311, loss=1.6658, rmse=2.3209, time=0.2101,	Val RMSE=1.8129
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=312, loss=1.6654, rmse=2.3748, time=0.2101,	Val RMSE=1.8134
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=313, loss=1.6650, rmse=2.3387, time=0.2101,	Val RMSE=1.8138
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=314, loss=1.6645, rmse=2.3158, time=0.2101,	Val RMSE=1.8143
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=315, loss=1.6641, rmse=2.3264, time=0.2101,	Val RMSE=1.8147
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=316, loss=1.6636, rmse=2.3260, time=0.2100,	Val RMSE=1.8148
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=317, loss=1.6632, rmse=2.3293, time=0.2100,	Val RMSE=1.8148
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=318, loss=1.6628, rmse=2.3665, time=0.2100,	Val RMSE=1.8147
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=319, loss=1.6623, rmse=2.3350, time=0.2101,	Val RMSE=1.8146
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=320, loss=1.6619, rmse=2.3112, time=0.2101,	Val RMSE=1.8145
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=321, loss=1.6615, rmse=2.3050, time=0.2101,	Val RMSE=1.8144
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=322, loss=1.6610, rmse=2.3046, time=0.2101,	Val RMSE=1.8144
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=323, loss=1.6606, rmse=2.3237, time=0.2101,	Val RMSE=1.8144
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=324, loss=1.6602, rmse=2.3244, time=0.2102,	Val RMSE=1.8143
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=325, loss=1.6598, rmse=2.3507, time=0.2103,	Val RMSE=1.8142
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=326, loss=1.6593, rmse=2.3139, time=0.2102,	Val RMSE=1.8139
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=327, loss=1.6589, rmse=2.3408, time=0.2102,	Val RMSE=1.8136
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=328, loss=1.6585, rmse=2.3009, time=0.2102,	Val RMSE=1.8133
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=329, loss=1.6581, rmse=2.3076, time=0.2105,	Val RMSE=1.8130
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=330, loss=1.6577, rmse=2.3402, time=0.2104,	Val RMSE=1.8127
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=331, loss=1.6573, rmse=2.3080, time=0.2104,	Val RMSE=1.8127
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=332, loss=1.6569, rmse=2.3518, time=0.2105,	Val RMSE=1.8128
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=333, loss=1.6565, rmse=2.3180, time=0.2105,	Val RMSE=1.8129
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=334, loss=1.6561, rmse=2.3063, time=0.2105,	Val RMSE=1.8131
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=335, loss=1.6557, rmse=2.3154, time=0.2104,	Val RMSE=1.8136
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=336, loss=1.6553, rmse=2.3313, time=0.2104,	Val RMSE=1.8140
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=337, loss=1.6549, rmse=2.3205, time=0.2104,	Val RMSE=1.8145
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=338, loss=1.6545, rmse=2.3469, time=0.2104,	Val RMSE=1.8151
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=339, loss=1.6541, rmse=2.3106, time=0.2103,	Val RMSE=1.8157
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=340, loss=1.6537, rmse=2.3223, time=0.2103,	Val RMSE=1.8161
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=341, loss=1.6533, rmse=2.3272, time=0.2103,	Val RMSE=1.8162
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=342, loss=1.6529, rmse=2.3093, time=0.2102,	Val RMSE=1.8164
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=343, loss=1.6525, rmse=2.2707, time=0.2102,	Val RMSE=1.8167
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=344, loss=1.6521, rmse=2.3173, time=0.2102,	Val RMSE=1.8170
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=345, loss=1.6518, rmse=2.3376, time=0.2102,	Val RMSE=1.8170
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=346, loss=1.6514, rmse=2.3002, time=0.2102,	Val RMSE=1.8166
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=347, loss=1.6510, rmse=2.3384, time=0.2101,	Val RMSE=1.8158
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=348, loss=1.6506, rmse=2.3065, time=0.2101,	Val RMSE=1.8152
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=349, loss=1.6502, rmse=2.3140, time=0.2101,	Val RMSE=1.8150
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=350, loss=1.6498, rmse=2.2732, time=0.2101,	Val RMSE=1.8149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=351, loss=1.6495, rmse=2.3419, time=0.2101,	Val RMSE=1.8149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=352, loss=1.6491, rmse=2.3222, time=0.2101,	Val RMSE=1.8149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=353, loss=1.6488, rmse=2.3586, time=0.2100,	Val RMSE=1.8149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=354, loss=1.6484, rmse=2.2741, time=0.2100,	Val RMSE=1.8150
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=355, loss=1.6481, rmse=2.3514, time=0.2100,	Val RMSE=1.8149
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=356, loss=1.6478, rmse=2.3482, time=0.2099,	Val RMSE=1.8150
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=357, loss=1.6474, rmse=2.3056, time=0.2099,	Val RMSE=1.8151
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=358, loss=1.6470, rmse=2.3029, time=0.2099,	Val RMSE=1.8154
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=359, loss=1.6467, rmse=2.3091, time=0.2099,	Val RMSE=1.8158
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=360, loss=1.6463, rmse=2.3164, time=0.2099,	Val RMSE=1.8161
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=361, loss=1.6460, rmse=2.3769, time=0.2099,	Val RMSE=1.8163
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=362, loss=1.6457, rmse=2.3029, time=0.2099,	Val RMSE=1.8167
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=363, loss=1.6453, rmse=2.3250, time=0.2098,	Val RMSE=1.8171
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=364, loss=1.6450, rmse=2.3223, time=0.2098,	Val RMSE=1.8174
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=365, loss=1.6446, rmse=2.3200, time=0.2098,	Val RMSE=1.8175
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=366, loss=1.6443, rmse=2.3166, time=0.2097,	Val RMSE=1.8177
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=367, loss=1.6439, rmse=2.3001, time=0.2097,	Val RMSE=1.8177
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=368, loss=1.6436, rmse=2.3608, time=0.2097,	Val RMSE=1.8177
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=369, loss=1.6433, rmse=2.3413, time=0.2096,	Val RMSE=1.8175
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=370, loss=1.6429, rmse=2.2911, time=0.2096,	Val RMSE=1.8173
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=371, loss=1.6426, rmse=2.3151, time=0.2096,	Val RMSE=1.8170
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=372, loss=1.6422, rmse=2.2991, time=0.2095,	Val RMSE=1.8170
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=373, loss=1.6419, rmse=2.2944, time=0.2095,	Val RMSE=1.8170
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=374, loss=1.6416, rmse=2.3345, time=0.2094,	Val RMSE=1.8171
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=375, loss=1.6413, rmse=2.3236, time=0.2094,	Val RMSE=1.8172
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=376, loss=1.6409, rmse=2.2968, time=0.2094,	Val RMSE=1.8174
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=377, loss=1.6406, rmse=2.2980, time=0.2093,	Val RMSE=1.8173
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=378, loss=1.6403, rmse=2.2877, time=0.2093,	Val RMSE=1.8174
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=379, loss=1.6400, rmse=2.2973, time=0.2092,	Val RMSE=1.8175
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=380, loss=1.6396, rmse=2.3108, time=0.2092,	Val RMSE=1.8179
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=381, loss=1.6393, rmse=2.3229, time=0.2092,	Val RMSE=1.8180
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=382, loss=1.6390, rmse=2.3208, time=0.2092,	Val RMSE=1.8181
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=383, loss=1.6387, rmse=2.2821, time=0.2092,	Val RMSE=1.8183
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=384, loss=1.6384, rmse=2.3481, time=0.2091,	Val RMSE=1.8186
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=385, loss=1.6380, rmse=2.2967, time=0.2091,	Val RMSE=1.8189
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=386, loss=1.6377, rmse=2.2946, time=0.2091,	Val RMSE=1.8192
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=387, loss=1.6374, rmse=2.3421, time=0.2091,	Val RMSE=1.8192
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=388, loss=1.6371, rmse=2.3186, time=0.2090,	Val RMSE=1.8191
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=389, loss=1.6368, rmse=2.2918, time=0.2090,	Val RMSE=1.8189
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=390, loss=1.6365, rmse=2.3393, time=0.2090,	Val RMSE=1.8185
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=391, loss=1.6362, rmse=2.2761, time=0.2090,	Val RMSE=1.8183
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=392, loss=1.6359, rmse=2.3372, time=0.2090,	Val RMSE=1.8181
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=393, loss=1.6356, rmse=2.3399, time=0.2090,	Val RMSE=1.8177
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=394, loss=1.6352, rmse=2.2568, time=0.2089,	Val RMSE=1.8175
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=395, loss=1.6350, rmse=2.3170, time=0.2089,	Val RMSE=1.8175
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=396, loss=1.6347, rmse=2.3312, time=0.2089,	Val RMSE=1.8177
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=397, loss=1.6344, rmse=2.3452, time=0.2089,	Val RMSE=1.8177
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=398, loss=1.6341, rmse=2.2840, time=0.2089,	Val RMSE=1.8180
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=399, loss=1.6338, rmse=2.3134, time=0.2088,	Val RMSE=1.8181
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=400, loss=1.6335, rmse=2.3395, time=0.2088,	Val RMSE=1.8181
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=401, loss=1.6333, rmse=2.3540, time=0.2088,	Val RMSE=1.8183
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=402, loss=1.6330, rmse=2.3023, time=0.2088,	Val RMSE=1.8186
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=403, loss=1.6327, rmse=2.2647, time=0.2088,	Val RMSE=1.8190
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=404, loss=1.6324, rmse=2.2957, time=0.2089,	Val RMSE=1.8191
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=405, loss=1.6321, rmse=2.2519, time=0.2089,	Val RMSE=1.8193
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=406, loss=1.6318, rmse=2.3246, time=0.2089,	Val RMSE=1.8194
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=407, loss=1.6315, rmse=2.3250, time=0.2089,	Val RMSE=1.8192
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=408, loss=1.6312, rmse=2.3602, time=0.2089,	Val RMSE=1.8188
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=409, loss=1.6309, rmse=2.3049, time=0.2088,	Val RMSE=1.8185
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=410, loss=1.6307, rmse=2.3113, time=0.2088,	Val RMSE=1.8183
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Iter=411, loss=1.6304, rmse=2.3088, time=0.2088,	Val RMSE=1.8182
+tensor([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+Best Iter Idx=107, Best Valid RMSE=1.7838, Best Test RMSE=1.8035

@@ -1,0 +1,561 @@
+Using backend: pytorch
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Detected an old version of PyTorch. Suggest using torch>=1.5.0 for the best experience.
+  return warnings.warn(message, category=category, stacklevel=1)
+Namespace(data_name='douban', data_test_ratio=0.1, data_valid_ratio=0.1, device=device(type='cpu'), gcn_agg_accum='sum', gcn_agg_norm_symm=True, gcn_agg_units=500, gcn_dropout=0.7, gcn_out_units=75, gen_r_num_basis_func=2, model_activation='leaky', save_dir='log/douban_PR', save_id=0, seed=123, share_param=False, silent=False, train_decay_patience=50, train_early_stopping_patience=100, train_grad_clip=1.0, train_log_interval=1, train_lr=0.01, train_lr_decay_factor=0.5, train_max_iter=2000, train_min_lr=0.001, train_optimizer='adam', train_valid_interval=1, use_one_hot_fea=True)
+Starting processing douban ...
+(3000, 3000)
+raw_data/douban/training_test_dataset.mat
+u_nodes:
+[   0    0    0 ... 2999 2999 2999]
+v_nodes:
+[  22   31   81 ... 2210 2341 2469]
+user Features:
+[[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+User features shape: (3000, 3000)
+Item Features
+[[1. 0. 0. ... 0. 0. 0.]
+ [0. 1. 0. ... 0. 0. 0.]
+ [0. 0. 1. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 1. 0. 0.]
+ [0. 0. 0. ... 0. 1. 0.]
+ [0. 0. 0. ... 0. 0. 1.]]
+Item features shape: (3000, 3000)
+train_labels: 123202
+[4 3 2 ... 3 3 4]
+u_train_idx: 123202
+[2711 1402  577 ... 2411  578  877]
+v_train_idx: 123202
+[1121 1664 1173 ...  601 1040  585]
+test_labels: 13689
+[2 1 0 ... 3 2 2]
+u_test_idx: 13689
+[   0    0    0 ... 2999 2999 2999]
+v_test_idx: 13689
+[ 104  192  335 ... 1390 1975 2128]
+class_values: 5
+[1. 2. 3. 4. 5.]
+number of users =  2999
+number of items =  3000
+train size 123202 , test size 13689 , all size 136891
+train u_size 123202 v_size 123202; test u_size 13689 v_size 13689; 
+......
+All rating pairs : 136891
+	All train rating pairs : 123202
+		Train rating pairs : 110881
+		Valid rating pairs : 12321
+	Test rating pairs  : 13689
+user and item number:
+2999
+3000
+Total user number = 2999, movie number = 3000
+Feature dim: 
+user: (2999, 2999)
+movie: (3000, 3000)
+v: 0.0
+v: 1.0
+v: 2.0
+v: 3.0
+v: 4.0
+enc graph AAA
+110881
+221762
+v: 0.0
+v: 1.0
+v: 2.0
+v: 3.0
+v: 4.0
+enc graph AAA
+123202
+246404
+Train enc graph: 	#user:2999	#movie:3000	#pairs:110881
+Train dec graph: 	#user:2999	#movie:3000	#pairs:110881
+Valid enc graph: 	#user:2999	#movie:3000	#pairs:110881
+Valid dec graph: 	#user:2999	#movie:3000	#pairs:12321
+Test enc graph: 	#user:2999	#movie:3000	#pairs:123202
+Test dec graph: 	#user:2999	#movie:3000	#pairs:13689
+Loading data finished ...
+
+Loading network finished ...
+
+Start training ...
+Total #Param of net: 15083910
+Total Param Number: 15083910
+Params:
+	encoder.ufc.weight: torch.Size([75, 500]), 37500
+	encoder.ufc.bias: torch.Size([75]), 75
+	encoder.ifc.weight: torch.Size([75, 500]), 37500
+	encoder.ifc.bias: torch.Size([75]), 75
+	encoder.conv.mods.0_0.weight: torch.Size([2999, 500]), 1499500
+	encoder.conv.mods.1_0.weight: torch.Size([2999, 500]), 1499500
+	encoder.conv.mods.2_0.weight: torch.Size([2999, 500]), 1499500
+	encoder.conv.mods.3_0.weight: torch.Size([2999, 500]), 1499500
+	encoder.conv.mods.4_0.weight: torch.Size([2999, 500]), 1499500
+	encoder.conv.mods.rev-0_0.weight: torch.Size([3000, 500]), 1500000
+	encoder.conv.mods.rev-1_0.weight: torch.Size([3000, 500]), 1500000
+	encoder.conv.mods.rev-2_0.weight: torch.Size([3000, 500]), 1500000
+	encoder.conv.mods.rev-3_0.weight: torch.Size([3000, 500]), 1500000
+	encoder.conv.mods.rev-4_0.weight: torch.Size([3000, 500]), 1500000
+	decoder.Ps.0: torch.Size([75, 75]), 5625
+	decoder.Ps.1: torch.Size([75, 75]), 5625
+	decoder.combine_basis.weight: torch.Size([5, 2]), 10
+Net(
+  (_act): LeakyReLU(negative_slope=0.1)
+  (encoder): GCMCLayer(
+    (ufc): Linear(in_features=500, out_features=75, bias=True)
+    (ifc): Linear(in_features=500, out_features=75, bias=True)
+    (dropout): Dropout(p=0.7, inplace=False)
+    (W_r): None
+    (conv): HeteroGraphConv(
+      (mods): ModuleDict(
+        (0_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (1_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (2_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (3_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (4_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-0_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-1_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-2_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-3_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-4_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+      )
+    )
+    (agg_act): LeakyReLU(negative_slope=0.1)
+  )
+  (decoder): BiDecoder(
+    (dropout): Dropout(p=0.0, inplace=False)
+    (Ps): ParameterList(
+        (0): Parameter containing: [torch.FloatTensor of size 75x75]
+        (1): Parameter containing: [torch.FloatTensor of size 75x75]
+    )
+    (combine_basis): Linear(in_features=2, out_features=5, bias=False)
+  )
+)
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/numpy/lib/function_base.py:393: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis)
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/numpy/core/_methods.py:161: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+Iter=1, loss=1.6094, rmse=1.3106, time=nan,	Val RMSE=1.1019, Test RMSE=1.1153
+Iter=2, loss=1.6013, rmse=1.2315, time=nan,	Val RMSE=1.0290, Test RMSE=1.0423
+Iter=3, loss=1.5861, rmse=1.0466, time=nan,	Val RMSE=0.8983, Test RMSE=0.9074
+Iter=4, loss=1.5752, rmse=0.8125, time=2.6085,	Val RMSE=0.8959, Test RMSE=0.9056
+Iter=5, loss=1.5637, rmse=0.8013, time=2.1891,	Val RMSE=0.9312
+Iter=6, loss=1.5514, rmse=0.8559, time=1.9342,	Val RMSE=0.9335
+Iter=7, loss=1.5412, rmse=0.8702, time=1.8288,	Val RMSE=0.9008
+Iter=8, loss=1.5296, rmse=0.8123, time=1.7446,	Val RMSE=0.8486, Test RMSE=0.8571
+Iter=9, loss=1.5193, rmse=0.7159, time=1.7179,	Val RMSE=0.8126, Test RMSE=0.8190
+Iter=10, loss=1.5100, rmse=0.6629, time=1.8373,	Val RMSE=0.8084, Test RMSE=0.8148
+Iter=11, loss=1.4994, rmse=0.6620, time=1.8182,	Val RMSE=0.8148
+Iter=12, loss=1.4889, rmse=0.6690, time=1.7839,	Val RMSE=0.8237
+Iter=13, loss=1.4793, rmse=0.6677, time=1.8107,	Val RMSE=0.8206
+Iter=14, loss=1.4702, rmse=0.6772, time=1.8070,	Val RMSE=0.8055, Test RMSE=0.8120
+Iter=15, loss=1.4610, rmse=0.6459, time=1.8021,	Val RMSE=0.7919, Test RMSE=0.7969
+Iter=16, loss=1.4516, rmse=0.6254, time=1.7727,	Val RMSE=0.7835, Test RMSE=0.7872
+Iter=17, loss=1.4425, rmse=0.6160, time=1.7511,	Val RMSE=0.7779, Test RMSE=0.7807
+Iter=18, loss=1.4336, rmse=0.6039, time=1.7723,	Val RMSE=0.7744, Test RMSE=0.7767
+Iter=19, loss=1.4245, rmse=0.6024, time=1.7904,	Val RMSE=0.7716, Test RMSE=0.7735
+Iter=20, loss=1.4154, rmse=0.6021, time=1.7597,	Val RMSE=0.7717
+Iter=21, loss=1.4062, rmse=0.5959, time=1.7612,	Val RMSE=0.7706, Test RMSE=0.7717
+Iter=22, loss=1.3973, rmse=0.6005, time=1.7622,	Val RMSE=0.7684, Test RMSE=0.7688
+Iter=23, loss=1.3885, rmse=0.5985, time=1.7699,	Val RMSE=0.7693
+Iter=24, loss=1.3797, rmse=0.5956, time=1.7801,	Val RMSE=0.7720
+Iter=25, loss=1.3715, rmse=0.5971, time=1.7694,	Val RMSE=0.7778
+Iter=26, loss=1.3641, rmse=0.6111, time=1.7628,	Val RMSE=0.7851
+Iter=27, loss=1.3572, rmse=0.6215, time=1.7761,	Val RMSE=0.7892
+Iter=28, loss=1.3506, rmse=0.6211, time=1.7687,	Val RMSE=0.7912
+Iter=29, loss=1.3447, rmse=0.6390, time=1.7590,	Val RMSE=0.7813
+Iter=30, loss=1.3385, rmse=0.6160, time=1.7395,	Val RMSE=0.7744
+Iter=31, loss=1.3325, rmse=0.5988, time=1.7213,	Val RMSE=0.7693
+Iter=32, loss=1.3266, rmse=0.5988, time=1.7131,	Val RMSE=0.7665, Test RMSE=0.7655
+Iter=33, loss=1.3209, rmse=0.5833, time=1.7026,	Val RMSE=0.7636, Test RMSE=0.7626
+Iter=34, loss=1.3156, rmse=0.5854, time=1.7108,	Val RMSE=0.7632, Test RMSE=0.7635
+Iter=35, loss=1.3106, rmse=0.5791, time=1.7050,	Val RMSE=0.7619, Test RMSE=0.7614
+Iter=36, loss=1.3057, rmse=0.5850, time=1.7121,	Val RMSE=0.7617, Test RMSE=0.7611
+Iter=37, loss=1.3009, rmse=0.5737, time=1.7048,	Val RMSE=0.7625
+Iter=38, loss=1.2961, rmse=0.5813, time=1.6955,	Val RMSE=0.7613, Test RMSE=0.7611
+Iter=39, loss=1.2915, rmse=0.5760, time=1.6948,	Val RMSE=0.7606, Test RMSE=0.7610
+Iter=40, loss=1.2870, rmse=0.5668, time=1.7058,	Val RMSE=0.7601, Test RMSE=0.7604
+Iter=41, loss=1.2826, rmse=0.5750, time=1.7412,	Val RMSE=0.7586, Test RMSE=0.7596
+Iter=42, loss=1.2783, rmse=0.5695, time=1.7557,	Val RMSE=0.7557, Test RMSE=0.7572
+Iter=43, loss=1.2741, rmse=0.5680, time=1.7709,	Val RMSE=0.7530, Test RMSE=0.7539
+Iter=44, loss=1.2700, rmse=0.5659, time=1.7728,	Val RMSE=0.7516, Test RMSE=0.7535
+Iter=45, loss=1.2659, rmse=0.5578, time=1.7803,	Val RMSE=0.7501, Test RMSE=0.7512
+Iter=46, loss=1.2619, rmse=0.5561, time=1.7886,	Val RMSE=0.7495, Test RMSE=0.7506
+Iter=47, loss=1.2580, rmse=0.5531, time=1.7824,	Val RMSE=0.7496
+Iter=48, loss=1.2541, rmse=0.5531, time=1.7739,	Val RMSE=0.7491, Test RMSE=0.7506
+Iter=49, loss=1.2503, rmse=0.5546, time=1.7694,	Val RMSE=0.7481, Test RMSE=0.7501
+Iter=50, loss=1.2467, rmse=0.5523, time=1.7620,	Val RMSE=0.7484
+Iter=51, loss=1.2431, rmse=0.5501, time=1.7687,	Val RMSE=0.7459, Test RMSE=0.7480
+Iter=52, loss=1.2396, rmse=0.5485, time=1.7619,	Val RMSE=0.7457, Test RMSE=0.7484
+Iter=53, loss=1.2361, rmse=0.5494, time=1.7614,	Val RMSE=0.7462
+Iter=54, loss=1.2328, rmse=0.5456, time=1.7583,	Val RMSE=0.7473
+Iter=55, loss=1.2294, rmse=0.5405, time=1.7548,	Val RMSE=0.7480
+Iter=56, loss=1.2262, rmse=0.5462, time=1.7541,	Val RMSE=0.7454, Test RMSE=0.7480
+Iter=57, loss=1.2230, rmse=0.5412, time=1.7615,	Val RMSE=0.7438, Test RMSE=0.7463
+Iter=58, loss=1.2199, rmse=0.5392, time=1.7612,	Val RMSE=0.7440
+Iter=59, loss=1.2169, rmse=0.5381, time=1.7566,	Val RMSE=0.7430, Test RMSE=0.7464
+Iter=60, loss=1.2140, rmse=0.5357, time=1.7473,	Val RMSE=0.7404, Test RMSE=0.7424
+Iter=61, loss=1.2111, rmse=0.5317, time=1.7578,	Val RMSE=0.7401, Test RMSE=0.7415
+Iter=62, loss=1.2083, rmse=0.5315, time=1.7601,	Val RMSE=0.7406
+Iter=63, loss=1.2055, rmse=0.5298, time=1.7579,	Val RMSE=0.7413
+Iter=64, loss=1.2027, rmse=0.5278, time=1.7746,	Val RMSE=0.7406
+Iter=65, loss=1.2000, rmse=0.5292, time=1.7889,	Val RMSE=0.7383, Test RMSE=0.7402
+Iter=66, loss=1.1974, rmse=0.5253, time=1.8104,	Val RMSE=0.7390
+Iter=67, loss=1.1949, rmse=0.5283, time=1.8150,	Val RMSE=0.7415
+Iter=68, loss=1.1924, rmse=0.5294, time=1.8084,	Val RMSE=0.7391
+Iter=69, loss=1.1899, rmse=0.5225, time=1.8043,	Val RMSE=0.7379, Test RMSE=0.7389
+Iter=70, loss=1.1874, rmse=0.5232, time=1.7988,	Val RMSE=0.7397
+Iter=71, loss=1.1851, rmse=0.5230, time=1.7918,	Val RMSE=0.7402
+Iter=72, loss=1.1828, rmse=0.5211, time=1.7858,	Val RMSE=0.7370, Test RMSE=0.7388
+Iter=73, loss=1.1804, rmse=0.5195, time=1.7827,	Val RMSE=0.7366, Test RMSE=0.7378
+Iter=74, loss=1.1782, rmse=0.5194, time=1.7801,	Val RMSE=0.7377
+Iter=75, loss=1.1760, rmse=0.5179, time=1.7772,	Val RMSE=0.7408
+Iter=76, loss=1.1738, rmse=0.5213, time=1.7740,	Val RMSE=0.7374
+Iter=77, loss=1.1717, rmse=0.5164, time=1.7761,	Val RMSE=0.7361, Test RMSE=0.7371
+Iter=78, loss=1.1696, rmse=0.5151, time=1.7729,	Val RMSE=0.7362
+Iter=79, loss=1.1675, rmse=0.5150, time=1.7696,	Val RMSE=0.7389
+Iter=80, loss=1.1655, rmse=0.5145, time=1.7675,	Val RMSE=0.7390
+Iter=81, loss=1.1635, rmse=0.5115, time=1.7649,	Val RMSE=0.7362
+Iter=82, loss=1.1615, rmse=0.5092, time=1.7650,	Val RMSE=0.7355, Test RMSE=0.7372
+Iter=83, loss=1.1595, rmse=0.5091, time=1.7753,	Val RMSE=0.7351, Test RMSE=0.7371
+Iter=84, loss=1.1576, rmse=0.5076, time=1.7687,	Val RMSE=0.7357
+Iter=85, loss=1.1558, rmse=0.5093, time=1.7641,	Val RMSE=0.7352
+Iter=86, loss=1.1539, rmse=0.5062, time=1.7657,	Val RMSE=0.7348, Test RMSE=0.7362
+Iter=87, loss=1.1520, rmse=0.5046, time=1.7806,	Val RMSE=0.7350
+Iter=88, loss=1.1502, rmse=0.5067, time=1.7883,	Val RMSE=0.7366
+Iter=89, loss=1.1484, rmse=0.5019, time=1.7895,	Val RMSE=0.7390
+Iter=90, loss=1.1467, rmse=0.5061, time=1.7847,	Val RMSE=0.7372
+Iter=91, loss=1.1449, rmse=0.4988, time=1.7826,	Val RMSE=0.7360
+Iter=92, loss=1.1433, rmse=0.5027, time=1.7792,	Val RMSE=0.7346, Test RMSE=0.7352
+Iter=93, loss=1.1415, rmse=0.4989, time=1.7728,	Val RMSE=0.7341, Test RMSE=0.7345
+Iter=94, loss=1.1399, rmse=0.5002, time=1.7669,	Val RMSE=0.7378
+Iter=95, loss=1.1383, rmse=0.5031, time=1.7644,	Val RMSE=0.7378
+Iter=96, loss=1.1367, rmse=0.4956, time=1.7613,	Val RMSE=0.7365
+Iter=97, loss=1.1351, rmse=0.4960, time=1.7620,	Val RMSE=0.7357
+Iter=98, loss=1.1335, rmse=0.4969, time=1.7612,	Val RMSE=0.7365
+Iter=99, loss=1.1320, rmse=0.4944, time=1.7597,	Val RMSE=0.7370
+Iter=100, loss=1.1304, rmse=0.4936, time=1.7621,	Val RMSE=0.7353
+Iter=101, loss=1.1289, rmse=0.4953, time=1.7626,	Val RMSE=0.7346
+Iter=102, loss=1.1274, rmse=0.4960, time=1.7607,	Val RMSE=0.7359
+Iter=103, loss=1.1259, rmse=0.4908, time=1.7578,	Val RMSE=0.7367
+Iter=104, loss=1.1245, rmse=0.4934, time=1.7557,	Val RMSE=0.7365
+Iter=105, loss=1.1231, rmse=0.4902, time=1.7582,	Val RMSE=0.7377
+Iter=106, loss=1.1216, rmse=0.4894, time=1.7614,	Val RMSE=0.7374
+Iter=107, loss=1.1202, rmse=0.4899, time=1.7574,	Val RMSE=0.7363
+Iter=108, loss=1.1188, rmse=0.4881, time=1.7523,	Val RMSE=0.7356
+Iter=109, loss=1.1175, rmse=0.4870, time=1.7531,	Val RMSE=0.7362
+Iter=110, loss=1.1162, rmse=0.4902, time=1.7530,	Val RMSE=0.7376
+Iter=111, loss=1.1148, rmse=0.4865, time=1.7682,	Val RMSE=0.7404
+Iter=112, loss=1.1136, rmse=0.4881, time=1.7773,	Val RMSE=0.7385
+Iter=113, loss=1.1123, rmse=0.4846, time=1.7750,	Val RMSE=0.7387
+Iter=114, loss=1.1110, rmse=0.4811, time=1.7742,	Val RMSE=0.7389
+Iter=115, loss=1.1097, rmse=0.4858, time=1.7733,	Val RMSE=0.7397
+Iter=116, loss=1.1084, rmse=0.4814, time=1.7705,	Val RMSE=0.7400
+Iter=117, loss=1.1072, rmse=0.4814, time=1.7677,	Val RMSE=0.7384
+Iter=118, loss=1.1060, rmse=0.4857, time=1.7675,	Val RMSE=0.7382
+Iter=119, loss=1.1047, rmse=0.4804, time=1.7688,	Val RMSE=0.7391
+Iter=120, loss=1.1035, rmse=0.4789, time=1.7676,	Val RMSE=0.7413
+Iter=121, loss=1.1023, rmse=0.4760, time=1.7658,	Val RMSE=0.7411
+Iter=122, loss=1.1011, rmse=0.4755, time=1.7642,	Val RMSE=0.7405
+Iter=123, loss=1.1000, rmse=0.4805, time=1.7641,	Val RMSE=0.7399
+Iter=124, loss=1.0988, rmse=0.4739, time=1.7631,	Val RMSE=0.7400
+Iter=125, loss=1.0976, rmse=0.4733, time=1.7670,	Val RMSE=0.7418
+Iter=126, loss=1.0965, rmse=0.4725, time=1.7690,	Val RMSE=0.7421
+Iter=127, loss=1.0953, rmse=0.4748, time=1.7684,	Val RMSE=0.7412
+Iter=128, loss=1.0942, rmse=0.4750, time=1.7672,	Val RMSE=0.7416
+Iter=129, loss=1.0931, rmse=0.4733, time=1.7691,	Val RMSE=0.7430
+Iter=130, loss=1.0920, rmse=0.4714, time=1.7769,	Val RMSE=0.7444
+Iter=131, loss=1.0910, rmse=0.4711, time=1.7813,	Val RMSE=0.7425
+Iter=132, loss=1.0899, rmse=0.4678, time=1.7776,	Val RMSE=0.7415
+Iter=133, loss=1.0888, rmse=0.4704, time=1.7791,	Val RMSE=0.7419
+Iter=134, loss=1.0877, rmse=0.4735, time=1.7837,	Val RMSE=0.7435
+Iter=135, loss=1.0867, rmse=0.4671, time=1.7981,	Val RMSE=0.7456
+Iter=136, loss=1.0856, rmse=0.4689, time=1.8001,	Val RMSE=0.7462
+Iter=137, loss=1.0846, rmse=0.4672, time=1.7997,	Val RMSE=0.7430
+Iter=138, loss=1.0836, rmse=0.4680, time=1.8028,	Val RMSE=0.7420
+Iter=139, loss=1.0826, rmse=0.4646, time=1.8005,	Val RMSE=0.7429
+Iter=140, loss=1.0815, rmse=0.4644, time=1.8061,	Val RMSE=0.7446
+Iter=141, loss=1.0805, rmse=0.4599, time=1.8014,	Val RMSE=0.7445
+Iter=142, loss=1.0795, rmse=0.4659, time=1.7981,	Val RMSE=0.7419
+Iter=143, loss=1.0785, rmse=0.4626, time=1.7949,	Val RMSE=0.7417
+Iter=144, loss=1.0776, rmse=0.4642, time=1.7953,	Val RMSE=0.7437
+Iter=145, loss=1.0766, rmse=0.4623, time=1.7936,	Val RMSE=0.7454
+Iter=146, loss=1.0757, rmse=0.4647, time=1.7932,	Val RMSE=0.7458
+Iter=147, loss=1.0747, rmse=0.4631, time=1.7922,	Val RMSE=0.7447
+Iter=148, loss=1.0738, rmse=0.4590, time=1.7933,	Val RMSE=0.7433
+Iter=149, loss=1.0728, rmse=0.4590, time=1.7936,	Val RMSE=0.7427
+Iter=150, loss=1.0719, rmse=0.4610, time=1.7941,	Val RMSE=0.7429
+Iter=151, loss=1.0710, rmse=0.4583, time=1.7917,	Val RMSE=0.7434
+Iter=152, loss=1.0701, rmse=0.4599, time=1.7890,	Val RMSE=0.7444
+Iter=153, loss=1.0692, rmse=0.4587, time=1.7907,	Val RMSE=0.7445
+Iter=154, loss=1.0682, rmse=0.4570, time=1.7938,	Val RMSE=0.7443
+Iter=155, loss=1.0673, rmse=0.4567, time=1.7945,	Val RMSE=0.7436
+Iter=156, loss=1.0664, rmse=0.4549, time=1.7913,	Val RMSE=0.7426
+Iter=157, loss=1.0656, rmse=0.4557, time=1.7909,	Val RMSE=0.7420
+Iter=158, loss=1.0647, rmse=0.4580, time=1.7937,	Val RMSE=0.7420
+Iter=159, loss=1.0639, rmse=0.4584, time=1.8011,	Val RMSE=0.7434
+Iter=160, loss=1.0630, rmse=0.4562, time=1.8100,	Val RMSE=0.7453
+Iter=161, loss=1.0621, rmse=0.4541, time=1.8105,	Val RMSE=0.7464
+Iter=162, loss=1.0613, rmse=0.4535, time=1.8123,	Val RMSE=0.7463
+Iter=163, loss=1.0605, rmse=0.4559, time=1.8103,	Val RMSE=0.7447
+Iter=164, loss=1.0596, rmse=0.4531, time=1.8089,	Val RMSE=0.7440
+Iter=165, loss=1.0588, rmse=0.4512, time=1.8071,	Val RMSE=0.7435
+Iter=166, loss=1.0580, rmse=0.4568, time=1.8040,	Val RMSE=0.7436
+Iter=167, loss=1.0572, rmse=0.4521, time=1.8034,	Val RMSE=0.7440
+Iter=168, loss=1.0564, rmse=0.4498, time=1.8025,	Val RMSE=0.7445
+Iter=169, loss=1.0556, rmse=0.4512, time=1.8057,	Val RMSE=0.7447
+Iter=170, loss=1.0548, rmse=0.4465, time=1.8050,	Val RMSE=0.7446
+Iter=171, loss=1.0540, rmse=0.4503, time=1.8078,	Val RMSE=0.7452
+Iter=172, loss=1.0532, rmse=0.4511, time=1.8064,	Val RMSE=0.7453
+Iter=173, loss=1.0524, rmse=0.4479, time=1.8060,	Val RMSE=0.7449
+Iter=174, loss=1.0517, rmse=0.4513, time=1.8052,	Val RMSE=0.7446
+Iter=175, loss=1.0509, rmse=0.4466, time=1.8035,	Val RMSE=0.7444
+Iter=176, loss=1.0501, rmse=0.4497, time=1.8022,	Val RMSE=0.7442
+Iter=177, loss=1.0494, rmse=0.4458, time=1.8025,	Val RMSE=0.7445
+Iter=178, loss=1.0486, rmse=0.4480, time=1.8043,	Val RMSE=0.7449
+Iter=179, loss=1.0479, rmse=0.4454, time=1.8014,	Val RMSE=0.7447
+Iter=180, loss=1.0471, rmse=0.4447, time=1.7982,	Val RMSE=0.7445
+Iter=181, loss=1.0464, rmse=0.4460, time=1.7984,	Val RMSE=0.7445
+Iter=182, loss=1.0457, rmse=0.4433, time=1.8019,	Val RMSE=0.7449
+Iter=183, loss=1.0449, rmse=0.4453, time=1.8113,	Val RMSE=0.7456
+Iter=184, loss=1.0442, rmse=0.4444, time=1.8115,	Val RMSE=0.7464
+Iter=185, loss=1.0435, rmse=0.4454, time=1.8121,	Val RMSE=0.7467
+Iter=186, loss=1.0428, rmse=0.4449, time=1.8119,	Val RMSE=0.7462
+Iter=187, loss=1.0420, rmse=0.4402, time=1.8099,	Val RMSE=0.7454
+Iter=188, loss=1.0414, rmse=0.4460, time=1.8084,	Val RMSE=0.7454
+Iter=189, loss=1.0406, rmse=0.4404, time=1.8061,	Val RMSE=0.7459
+Iter=190, loss=1.0399, rmse=0.4414, time=1.8036,	Val RMSE=0.7463
+Iter=191, loss=1.0392, rmse=0.4409, time=1.8037,	Val RMSE=0.7462
+Iter=192, loss=1.0385, rmse=0.4423, time=1.8065,	Val RMSE=0.7459
+Iter=193, loss=1.0378, rmse=0.4391, time=1.8077,	Val RMSE=0.7461
+Iter=194, loss=1.0372, rmse=0.4434, time=1.8085,	Val RMSE=0.7466
+Iter=195, loss=1.0365, rmse=0.4420, time=1.8148,	Val RMSE=0.7470
+Iter=196, loss=1.0359, rmse=0.4404, time=1.8191,	Val RMSE=0.7468
+Iter=197, loss=1.0352, rmse=0.4403, time=1.8198,	Val RMSE=0.7461
+Iter=198, loss=1.0345, rmse=0.4373, time=1.8189,	Val RMSE=0.7456
+Iter=199, loss=1.0339, rmse=0.4386, time=1.8182,	Val RMSE=0.7451
+Iter=200, loss=1.0332, rmse=0.4386, time=1.8229,	Val RMSE=0.7451
+Iter=201, loss=1.0326, rmse=0.4365, time=1.8239,	Val RMSE=0.7451
+Iter=202, loss=1.0319, rmse=0.4356, time=1.8209,	Val RMSE=0.7452
+Iter=203, loss=1.0313, rmse=0.4380, time=1.8191,	Val RMSE=0.7451
+Iter=204, loss=1.0306, rmse=0.4401, time=1.8181,	Val RMSE=0.7455
+Iter=205, loss=1.0300, rmse=0.4384, time=1.8195,	Val RMSE=0.7458
+Iter=206, loss=1.0294, rmse=0.4345, time=1.8291,	Val RMSE=0.7461
+Iter=207, loss=1.0287, rmse=0.4348, time=1.8304,	Val RMSE=0.7463
+Iter=208, loss=1.0281, rmse=0.4346, time=1.8319,	Val RMSE=0.7464
+Iter=209, loss=1.0275, rmse=0.4415, time=1.8309,	Val RMSE=0.7464
+Iter=210, loss=1.0269, rmse=0.4342, time=1.8293,	Val RMSE=0.7464
+Iter=211, loss=1.0263, rmse=0.4363, time=1.8275,	Val RMSE=0.7465
+Iter=212, loss=1.0257, rmse=0.4363, time=1.8250,	Val RMSE=0.7465
+Iter=213, loss=1.0251, rmse=0.4327, time=1.8226,	Val RMSE=0.7466
+Iter=214, loss=1.0245, rmse=0.4320, time=1.8213,	Val RMSE=0.7462
+Iter=215, loss=1.0239, rmse=0.4357, time=1.8218,	Val RMSE=0.7459
+Iter=216, loss=1.0233, rmse=0.4398, time=1.8209,	Val RMSE=0.7455
+Iter=217, loss=1.0228, rmse=0.4332, time=1.8197,	Val RMSE=0.7455
+Iter=218, loss=1.0222, rmse=0.4361, time=1.8199,	Val RMSE=0.7456
+Iter=219, loss=1.0216, rmse=0.4340, time=1.8193,	Val RMSE=0.7460
+Iter=220, loss=1.0210, rmse=0.4328, time=1.8196,	Val RMSE=0.7462
+Iter=221, loss=1.0205, rmse=0.4332, time=1.8182,	Val RMSE=0.7465
+Iter=222, loss=1.0199, rmse=0.4298, time=1.8169,	Val RMSE=0.7466
+Iter=223, loss=1.0193, rmse=0.4327, time=1.8155,	Val RMSE=0.7466
+Iter=224, loss=1.0188, rmse=0.4309, time=1.8173,	Val RMSE=0.7463
+Iter=225, loss=1.0182, rmse=0.4319, time=1.8195,	Val RMSE=0.7460
+Iter=226, loss=1.0177, rmse=0.4336, time=1.8171,	Val RMSE=0.7462
+Iter=227, loss=1.0172, rmse=0.4338, time=1.8144,	Val RMSE=0.7462
+Iter=228, loss=1.0166, rmse=0.4312, time=1.8141,	Val RMSE=0.7465
+Iter=229, loss=1.0161, rmse=0.4277, time=1.8155,	Val RMSE=0.7469
+Iter=230, loss=1.0155, rmse=0.4310, time=1.8242,	Val RMSE=0.7472
+Iter=231, loss=1.0150, rmse=0.4291, time=1.8275,	Val RMSE=0.7472
+Iter=232, loss=1.0144, rmse=0.4273, time=1.8258,	Val RMSE=0.7471
+Iter=233, loss=1.0139, rmse=0.4285, time=1.8270,	Val RMSE=0.7473
+Iter=234, loss=1.0134, rmse=0.4290, time=1.8254,	Val RMSE=0.7474
+Iter=235, loss=1.0128, rmse=0.4311, time=1.8241,	Val RMSE=0.7476
+Iter=236, loss=1.0123, rmse=0.4299, time=1.8238,	Val RMSE=0.7477
+Iter=237, loss=1.0118, rmse=0.4290, time=1.8222,	Val RMSE=0.7479
+Iter=238, loss=1.0113, rmse=0.4328, time=1.8212,	Val RMSE=0.7480
+Iter=239, loss=1.0108, rmse=0.4312, time=1.8213,	Val RMSE=0.7480
+Iter=240, loss=1.0103, rmse=0.4279, time=1.8213,	Val RMSE=0.7481
+Iter=241, loss=1.0098, rmse=0.4286, time=1.8201,	Val RMSE=0.7479
+Iter=242, loss=1.0093, rmse=0.4270, time=1.8206,	Val RMSE=0.7477
+Iter=243, loss=1.0088, rmse=0.4260, time=1.8198,	Val RMSE=0.7475
+Iter=244, loss=1.0083, rmse=0.4301, time=1.8196,	Val RMSE=0.7476
+Iter=245, loss=1.0078, rmse=0.4265, time=1.8188,	Val RMSE=0.7480
+Iter=246, loss=1.0073, rmse=0.4283, time=1.8177,	Val RMSE=0.7482
+Iter=247, loss=1.0068, rmse=0.4289, time=1.8165,	Val RMSE=0.7483
+Iter=248, loss=1.0063, rmse=0.4248, time=1.8183,	Val RMSE=0.7482
+Iter=249, loss=1.0059, rmse=0.4296, time=1.8181,	Val RMSE=0.7481
+Iter=250, loss=1.0054, rmse=0.4239, time=1.8173,	Val RMSE=0.7479
+Iter=251, loss=1.0049, rmse=0.4266, time=1.8151,	Val RMSE=0.7478
+Iter=252, loss=1.0044, rmse=0.4267, time=1.8152,	Val RMSE=0.7478
+Iter=253, loss=1.0040, rmse=0.4289, time=1.8154,	Val RMSE=0.7478
+Iter=254, loss=1.0035, rmse=0.4238, time=1.8207,	Val RMSE=0.7477
+Iter=255, loss=1.0030, rmse=0.4272, time=1.8225,	Val RMSE=0.7478
+Iter=256, loss=1.0026, rmse=0.4262, time=1.8224,	Val RMSE=0.7480
+Iter=257, loss=1.0021, rmse=0.4225, time=1.8243,	Val RMSE=0.7482
+Iter=258, loss=1.0017, rmse=0.4269, time=1.8229,	Val RMSE=0.7487
+Iter=259, loss=1.0012, rmse=0.4273, time=1.8214,	Val RMSE=0.7491
+Iter=260, loss=1.0008, rmse=0.4255, time=1.8191,	Val RMSE=0.7495
+Iter=261, loss=1.0003, rmse=0.4246, time=1.8172,	Val RMSE=0.7498
+Iter=262, loss=0.9999, rmse=0.4259, time=1.8161,	Val RMSE=0.7502
+Iter=263, loss=0.9994, rmse=0.4235, time=1.8156,	Val RMSE=0.7504
+Iter=264, loss=0.9990, rmse=0.4249, time=1.8144,	Val RMSE=0.7504
+Iter=265, loss=0.9986, rmse=0.4265, time=1.8135,	Val RMSE=0.7504
+Iter=266, loss=0.9982, rmse=0.4268, time=1.8124,	Val RMSE=0.7502
+Iter=267, loss=0.9977, rmse=0.4222, time=1.8119,	Val RMSE=0.7499
+Iter=268, loss=0.9973, rmse=0.4246, time=1.8112,	Val RMSE=0.7496
+Iter=269, loss=0.9969, rmse=0.4252, time=1.8104,	Val RMSE=0.7493
+Iter=270, loss=0.9964, rmse=0.4220, time=1.8096,	Val RMSE=0.7491
+Iter=271, loss=0.9960, rmse=0.4240, time=1.8085,	Val RMSE=0.7489
+Iter=272, loss=0.9956, rmse=0.4215, time=1.8083,	Val RMSE=0.7489
+Iter=273, loss=0.9952, rmse=0.4233, time=1.8098,	Val RMSE=0.7488
+Iter=274, loss=0.9948, rmse=0.4235, time=1.8083,	Val RMSE=0.7488
+Iter=275, loss=0.9944, rmse=0.4243, time=1.8060,	Val RMSE=0.7490
+Iter=276, loss=0.9940, rmse=0.4239, time=1.8049,	Val RMSE=0.7492
+Iter=277, loss=0.9935, rmse=0.4234, time=1.8051,	Val RMSE=0.7495
+Iter=278, loss=0.9931, rmse=0.4239, time=1.8070,	Val RMSE=0.7495
+Iter=279, loss=0.9928, rmse=0.4243, time=1.8115,	Val RMSE=0.7494
+Iter=280, loss=0.9923, rmse=0.4220, time=1.8108,	Val RMSE=0.7494
+Iter=281, loss=0.9920, rmse=0.4234, time=1.8091,	Val RMSE=0.7495
+Iter=282, loss=0.9916, rmse=0.4238, time=1.8092,	Val RMSE=0.7496
+Iter=283, loss=0.9912, rmse=0.4225, time=1.8079,	Val RMSE=0.7496
+Iter=284, loss=0.9908, rmse=0.4213, time=1.8066,	Val RMSE=0.7496
+Iter=285, loss=0.9904, rmse=0.4237, time=1.8047,	Val RMSE=0.7496
+Iter=286, loss=0.9900, rmse=0.4214, time=1.8033,	Val RMSE=0.7495
+Iter=287, loss=0.9896, rmse=0.4226, time=1.8021,	Val RMSE=0.7495
+Iter=288, loss=0.9892, rmse=0.4209, time=1.8026,	Val RMSE=0.7495
+Iter=289, loss=0.9888, rmse=0.4237, time=1.8017,	Val RMSE=0.7494
+Iter=290, loss=0.9885, rmse=0.4235, time=1.8005,	Val RMSE=0.7492
+Iter=291, loss=0.9881, rmse=0.4256, time=1.7998,	Val RMSE=0.7492
+Iter=292, loss=0.9877, rmse=0.4242, time=1.8002,	Val RMSE=0.7493
+Iter=293, loss=0.9874, rmse=0.4231, time=1.8002,	Val RMSE=0.7494
+Iter=294, loss=0.9870, rmse=0.4231, time=1.7990,	Val RMSE=0.7495
+Iter=295, loss=0.9867, rmse=0.4203, time=1.7977,	Val RMSE=0.7497
+Iter=296, loss=0.9863, rmse=0.4222, time=1.7964,	Val RMSE=0.7499
+Iter=297, loss=0.9859, rmse=0.4182, time=1.7971,	Val RMSE=0.7500
+Iter=298, loss=0.9856, rmse=0.4213, time=1.7983,	Val RMSE=0.7501
+Iter=299, loss=0.9852, rmse=0.4178, time=1.7979,	Val RMSE=0.7501
+Iter=300, loss=0.9848, rmse=0.4169, time=1.7960,	Val RMSE=0.7502
+Iter=301, loss=0.9844, rmse=0.4210, time=1.7945,	Val RMSE=0.7501
+Iter=302, loss=0.9841, rmse=0.4219, time=1.7943,	Val RMSE=0.7501
+Iter=303, loss=0.9838, rmse=0.4212, time=1.7956,	Val RMSE=0.7501
+Iter=304, loss=0.9834, rmse=0.4195, time=1.8003,	Val RMSE=0.7503
+Iter=305, loss=0.9831, rmse=0.4243, time=1.8015,	Val RMSE=0.7504
+Iter=306, loss=0.9827, rmse=0.4230, time=1.8028,	Val RMSE=0.7505
+Iter=307, loss=0.9824, rmse=0.4201, time=1.8019,	Val RMSE=0.7506
+Iter=308, loss=0.9820, rmse=0.4188, time=1.8008,	Val RMSE=0.7508
+Iter=309, loss=0.9817, rmse=0.4182, time=1.7999,	Val RMSE=0.7508
+Iter=310, loss=0.9813, rmse=0.4187, time=1.7985,	Val RMSE=0.7510
+Iter=311, loss=0.9810, rmse=0.4187, time=1.7973,	Val RMSE=0.7509
+Iter=312, loss=0.9807, rmse=0.4221, time=1.7967,	Val RMSE=0.7508
+Iter=313, loss=0.9803, rmse=0.4189, time=1.7961,	Val RMSE=0.7507
+Iter=314, loss=0.9800, rmse=0.4165, time=1.7955,	Val RMSE=0.7505
+Iter=315, loss=0.9797, rmse=0.4210, time=1.7952,	Val RMSE=0.7503
+Iter=316, loss=0.9793, rmse=0.4202, time=1.7948,	Val RMSE=0.7499
+Iter=317, loss=0.9790, rmse=0.4164, time=1.7948,	Val RMSE=0.7498
+Iter=318, loss=0.9787, rmse=0.4199, time=1.7946,	Val RMSE=0.7499
+Iter=319, loss=0.9783, rmse=0.4202, time=1.7944,	Val RMSE=0.7501
+Iter=320, loss=0.9780, rmse=0.4155, time=1.7936,	Val RMSE=0.7503
+Iter=321, loss=0.9777, rmse=0.4175, time=1.7925,	Val RMSE=0.7505
+Iter=322, loss=0.9773, rmse=0.4164, time=1.7968,	Val RMSE=0.7505
+Iter=323, loss=0.9770, rmse=0.4171, time=1.7995,	Val RMSE=0.7505
+Iter=324, loss=0.9767, rmse=0.4205, time=1.7988,	Val RMSE=0.7506
+Iter=325, loss=0.9764, rmse=0.4146, time=1.7969,	Val RMSE=0.7505
+Iter=326, loss=0.9761, rmse=0.4172, time=1.7974,	Val RMSE=0.7504
+Iter=327, loss=0.9757, rmse=0.4161, time=1.7987,	Val RMSE=0.7503
+Iter=328, loss=0.9754, rmse=0.4198, time=1.8032,	Val RMSE=0.7501
+Iter=329, loss=0.9751, rmse=0.4180, time=1.8063,	Val RMSE=0.7501
+Iter=330, loss=0.9748, rmse=0.4231, time=1.8099,	Val RMSE=0.7503
+Iter=331, loss=0.9745, rmse=0.4189, time=1.8101,	Val RMSE=0.7504
+Iter=332, loss=0.9742, rmse=0.4177, time=1.8092,	Val RMSE=0.7506
+Iter=333, loss=0.9739, rmse=0.4195, time=1.8082,	Val RMSE=0.7507
+Iter=334, loss=0.9736, rmse=0.4143, time=1.8071,	Val RMSE=0.7509
+Iter=335, loss=0.9733, rmse=0.4180, time=1.8054,	Val RMSE=0.7510
+Iter=336, loss=0.9730, rmse=0.4140, time=1.8051,	Val RMSE=0.7509
+Iter=337, loss=0.9727, rmse=0.4158, time=1.8046,	Val RMSE=0.7509
+Iter=338, loss=0.9724, rmse=0.4211, time=1.8030,	Val RMSE=0.7508
+Iter=339, loss=0.9721, rmse=0.4159, time=1.8014,	Val RMSE=0.7506
+Iter=340, loss=0.9718, rmse=0.4201, time=1.7998,	Val RMSE=0.7505
+Iter=341, loss=0.9715, rmse=0.4147, time=1.7986,	Val RMSE=0.7505
+Iter=342, loss=0.9712, rmse=0.4178, time=1.7976,	Val RMSE=0.7506
+Iter=343, loss=0.9710, rmse=0.4174, time=1.7962,	Val RMSE=0.7506
+Iter=344, loss=0.9707, rmse=0.4184, time=1.7952,	Val RMSE=0.7506
+Iter=345, loss=0.9704, rmse=0.4165, time=1.7938,	Val RMSE=0.7506
+Iter=346, loss=0.9701, rmse=0.4203, time=1.7924,	Val RMSE=0.7507
+Iter=347, loss=0.9698, rmse=0.4154, time=1.7915,	Val RMSE=0.7508
+Iter=348, loss=0.9695, rmse=0.4150, time=1.7898,	Val RMSE=0.7508
+Iter=349, loss=0.9692, rmse=0.4157, time=1.7890,	Val RMSE=0.7507
+Iter=350, loss=0.9690, rmse=0.4152, time=1.7868,	Val RMSE=0.7507
+Iter=351, loss=0.9687, rmse=0.4161, time=1.7851,	Val RMSE=0.7508
+Iter=352, loss=0.9684, rmse=0.4149, time=1.7842,	Val RMSE=0.7510
+Iter=353, loss=0.9681, rmse=0.4154, time=1.7855,	Val RMSE=0.7513
+Iter=354, loss=0.9678, rmse=0.4162, time=1.7855,	Val RMSE=0.7514
+Iter=355, loss=0.9676, rmse=0.4190, time=1.7847,	Val RMSE=0.7516
+Iter=356, loss=0.9673, rmse=0.4141, time=1.7830,	Val RMSE=0.7518
+Iter=357, loss=0.9670, rmse=0.4156, time=1.7815,	Val RMSE=0.7519
+Iter=358, loss=0.9667, rmse=0.4155, time=1.7800,	Val RMSE=0.7520
+Iter=359, loss=0.9665, rmse=0.4158, time=1.7782,	Val RMSE=0.7521
+Iter=360, loss=0.9662, rmse=0.4170, time=1.7762,	Val RMSE=0.7520
+Iter=361, loss=0.9659, rmse=0.4174, time=1.7743,	Val RMSE=0.7519
+Iter=362, loss=0.9657, rmse=0.4145, time=1.7725,	Val RMSE=0.7517
+Iter=363, loss=0.9654, rmse=0.4143, time=1.7710,	Val RMSE=0.7514
+Iter=364, loss=0.9652, rmse=0.4201, time=1.7694,	Val RMSE=0.7511
+Iter=365, loss=0.9649, rmse=0.4159, time=1.7680,	Val RMSE=0.7511
+Iter=366, loss=0.9646, rmse=0.4139, time=1.7668,	Val RMSE=0.7511
+Iter=367, loss=0.9644, rmse=0.4136, time=1.7652,	Val RMSE=0.7510
+Iter=368, loss=0.9641, rmse=0.4148, time=1.7641,	Val RMSE=0.7509
+Iter=369, loss=0.9639, rmse=0.4179, time=1.7631,	Val RMSE=0.7509
+Iter=370, loss=0.9636, rmse=0.4113, time=1.7616,	Val RMSE=0.7509
+Iter=371, loss=0.9634, rmse=0.4135, time=1.7599,	Val RMSE=0.7510
+Iter=372, loss=0.9631, rmse=0.4149, time=1.7588,	Val RMSE=0.7512
+Iter=373, loss=0.9628, rmse=0.4124, time=1.7586,	Val RMSE=0.7515
+Iter=374, loss=0.9626, rmse=0.4128, time=1.7575,	Val RMSE=0.7518
+Iter=375, loss=0.9623, rmse=0.4093, time=1.7554,	Val RMSE=0.7519
+Iter=376, loss=0.9621, rmse=0.4136, time=1.7533,	Val RMSE=0.7520
+Iter=377, loss=0.9618, rmse=0.4132, time=1.7521,	Val RMSE=0.7521
+Iter=378, loss=0.9616, rmse=0.4132, time=1.7512,	Val RMSE=0.7522
+Iter=379, loss=0.9613, rmse=0.4118, time=1.7519,	Val RMSE=0.7522
+Iter=380, loss=0.9611, rmse=0.4120, time=1.7526,	Val RMSE=0.7521
+Iter=381, loss=0.9608, rmse=0.4131, time=1.7517,	Val RMSE=0.7519
+Iter=382, loss=0.9606, rmse=0.4151, time=1.7527,	Val RMSE=0.7517
+Iter=383, loss=0.9603, rmse=0.4117, time=1.7521,	Val RMSE=0.7516
+Iter=384, loss=0.9601, rmse=0.4123, time=1.7515,	Val RMSE=0.7516
+Iter=385, loss=0.9598, rmse=0.4150, time=1.7502,	Val RMSE=0.7516
+Iter=386, loss=0.9596, rmse=0.4107, time=1.7485,	Val RMSE=0.7515
+Iter=387, loss=0.9593, rmse=0.4111, time=1.7472,	Val RMSE=0.7514
+Iter=388, loss=0.9591, rmse=0.4114, time=1.7457,	Val RMSE=0.7512
+Iter=389, loss=0.9589, rmse=0.4115, time=1.7449,	Val RMSE=0.7511
+Iter=390, loss=0.9586, rmse=0.4104, time=1.7437,	Val RMSE=0.7510
+Iter=391, loss=0.9584, rmse=0.4126, time=1.7425,	Val RMSE=0.7511
+Iter=392, loss=0.9581, rmse=0.4154, time=1.7415,	Val RMSE=0.7513
+Iter=393, loss=0.9579, rmse=0.4166, time=1.7407,	Val RMSE=0.7516
+Iter=394, loss=0.9577, rmse=0.4093, time=1.7399,	Val RMSE=0.7521
+Iter=395, loss=0.9574, rmse=0.4149, time=1.7390,	Val RMSE=0.7525
+Iter=396, loss=0.9572, rmse=0.4132, time=1.7375,	Val RMSE=0.7528
+Iter=397, loss=0.9570, rmse=0.4113, time=1.7365,	Val RMSE=0.7528
+Best Iter Idx=93, Best Valid RMSE=0.7341, Best Test RMSE=0.7345

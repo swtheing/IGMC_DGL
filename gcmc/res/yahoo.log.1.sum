@@ -1,0 +1,1308 @@
+Using backend: pytorch
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Detected an old version of PyTorch. Suggest using torch>=1.5.0 for the best experience.
+  return warnings.warn(message, category=category, stacklevel=1)
+Namespace(data_name='yahoo_music', data_test_ratio=0.1, data_valid_ratio=0.1, device=device(type='cpu'), gcn_agg_accum='sum', gcn_agg_norm_symm=True, gcn_agg_units=1700, gcn_dropout=0.7, gcn_out_units=75, gen_r_num_basis_func=2, model_activation='leaky', save_dir='log/yahoo_music_OV', save_id=9, seed=123, share_param=False, silent=False, train_decay_patience=50, train_early_stopping_patience=100, train_grad_clip=1.0, train_log_interval=1, train_lr=0.01, train_lr_decay_factor=0.5, train_max_iter=2000, train_min_lr=0.001, train_optimizer='adam', train_valid_interval=1, use_one_hot_fea=True)
+Starting processing yahoo_music ...
+(3000, 3000)
+raw_data/yahoo_music/training_test_dataset.mat
+u_nodes:
+[   1    1    1 ... 2996 2997 2997]
+v_nodes:
+[1353 1906 2992 ... 1221 1589 2801]
+user Features:
+[[1. 0. 0. ... 0. 0. 0.]
+ [0. 1. 0. ... 0. 0. 0.]
+ [0. 0. 1. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 1. 0. 0.]
+ [0. 0. 0. ... 0. 1. 0.]
+ [0. 0. 0. ... 0. 0. 1.]]
+User features shape: (3000, 3000)
+Item Features
+[[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+Item features shape: (3000, 3000)
+train_labels: 4802
+[41 61 26 ... 13 61 61]
+u_train_idx: 4802
+[1601 1930 2851 ...  834  166 1563]
+v_train_idx: 4802
+[2160  568 2488 ... 1936  778 1044]
+test_labels: 533
+[26 61 61 61 61  3 61 41 13 26 41 26 41 26 61 60 61 41 52 61 61 51 60 60
+ 56 61 63 60 56 65 41 26 26 26 26 26 26 13 70 61 61 61 61 26 41 41 13 13
+ 61 26 26 42 41 41 26 41 61 41 26 41 41 61 61 26 70 61 61 70 61 61 61 61
+ 26 61 13 41 26 61 41 26 61 41 41 61 41 41 61 13 26 13 13 58 13 61 13 61
+ 61 61 61 41 61 26 13 61 26 61 41 26 26 26 61 61 61 41 70 41 61 13 41 70
+ 61 61 61 61 61 61 61 61 61 63 26 41 61 26 70 61 61 61 61 26 61 61 61 67
+ 70 34 36 61 51 13 70 70 26 61 61 61 61 41 61 61 61 61 61 61 61 61 13 51
+ 51 61 26 41 26 54 70 41 61 41 13 41 26 70 70 61 13 41 41 26 41 13 41 41
+ 41 61 61 26 41 41 61 61 61 61 61 61 26 70 61 13 41 61 41 61 51 61 41 13
+ 61 51 13 13 26  8 32 70 31 26 13 61 26 61 41 61 61 61 61 41 41 41 61 13
+ 61 26 61 61 61 53 60 13 26 61 41 41 41 32 61 61 13 41 70 70 70 61 70 70
+ 70 32 70 70 51 70 70 31 61 41 61 61 61 70 26 26 13 26 26 41 26 41 41 61
+ 41 61  3 70 41  9 70 61 41 26 61 41 41 61 41 61 61 41 41 41 41 70 41 70
+ 61 13 26 13 61 26  3 61 10 61 13 61 61 41 61 61 41 51 61 61 13 13 70 13
+ 61 41 61 26 57 61 61 61 61 61 41 54 19 32 61 70 61 13 13 26 70 13 13 26
+ 26 13 13 13 41 41 26 61 26 61 70 61 61 41 61 26 26 61 61 61 41 41 41 61
+ 61 13 51 61 61 70 26 61 41 61 61 70 41 13 61 13 41 41 61 61 41 41 46 51
+ 51 61 13 41 61 61  9 61 70 26 61 51 61 61 13 61 61 61 41 61 61 13 61 61
+ 26 61 61 61 61 41 70 61 61 41 26 41 61 41 13 41 41 61 61 13 26 61 41 41
+ 61 61 61 13 41 26 26 13 41 26 26 26 13 26 26 13  3 70 61 61 51 70 61 70
+ 61 61 61 61 70 61 70 61 61 51 61 26 26 61 61 61 41 61 26 41 61 26 61 61
+ 13 41 61 26 26 25 30 41 41 61 13 41 41 39 41 41 41 70 13 41 41 51 26 61
+ 41 61 41 26 61]
+u_test_idx: 533
+[   1    5    9   11   16   17   24   24   39   39   44   44   67   67
+   96   97   97   97   97   97   97   97   97   97   97   97   97   97
+   97   97  120  141  141  141  141  141  141  143  166  168  217  217
+  217  217  217  217  217  217  217  217  239  239  239  244  262  263
+  267  273  273  273  275  282  290  292  298  300  301  303  311  330
+  335  342  349  356  363  377  388  393  394  398  399  399  399  399
+  399  407  410  436  446  449  449  454  454  455  461  469  469  476
+  479  479  484  508  510  534  547  553  562  562  562  562  574  580
+  580  582  589  593  594  595  602  607  608  608  608  608  608  608
+  608  621  621  624  624  624  625  636  657  666  673  673  684  689
+  690  690  690  692  692  692  692  696  696  700  703  703  758  770
+  770  770  770  770  770  770  770  770  770  787  799  818  822  822
+  822  826  833  834  854  854  854  854  854  862  862  862  868  875
+  897  906  906  917  917  917  917  917  917  917  917  917  943  943
+  943  943  943  949  951  961  961  964  987  991  994  994  994 1003
+ 1008 1035 1048 1059 1059 1066 1078 1079 1093 1101 1107 1116 1116 1116
+ 1116 1120 1120 1122 1129 1162 1167 1170 1178 1178 1178 1178 1178 1178
+ 1178 1191 1196 1204 1210 1211 1221 1236 1236 1242 1311 1313 1314 1314
+ 1316 1323 1335 1338 1338 1349 1356 1356 1356 1356 1356 1356 1356 1356
+ 1356 1356 1356 1356 1356 1357 1406 1406 1406 1406 1408 1423 1425 1445
+ 1445 1448 1459 1459 1459 1459 1468 1469 1469 1469 1469 1469 1469 1469
+ 1472 1475 1476 1479 1483 1483 1483 1483 1483 1483 1483 1491 1491 1491
+ 1491 1513 1528 1528 1528 1533 1533 1533 1542 1563 1563 1563 1563 1563
+ 1576 1577 1594 1613 1626 1627 1637 1637 1638 1675 1677 1681 1685 1689
+ 1711 1723 1730 1733 1739 1769 1785 1799 1803 1803 1815 1821 1821 1821
+ 1821 1821 1830 1844 1844 1844 1847 1876 1876 1882 1891 1907 1907 1907
+ 1908 1908 1920 1925 1935 1939 1956 1980 1984 1992 1996 2032 2033 2037
+ 2038 2038 2049 2053 2058 2061 2071 2077 2088 2096 2100 2115 2115 2117
+ 2120 2120 2127 2129 2145 2153 2174 2183 2183 2183 2194 2207 2209 2228
+ 2232 2236 2236 2236 2236 2238 2238 2238 2238 2238 2243 2247 2257 2260
+ 2261 2262 2264 2272 2305 2310 2327 2330 2339 2342 2357 2359 2366 2370
+ 2371 2377 2381 2383 2394 2422 2441 2459 2460 2474 2481 2487 2493 2493
+ 2493 2499 2501 2509 2513 2527 2566 2572 2576 2585 2585 2590 2590 2595
+ 2595 2595 2595 2595 2595 2595 2607 2619 2624 2635 2639 2639 2644 2650
+ 2660 2673 2677 2680 2680 2682 2687 2691 2708 2708 2708 2714 2736 2740
+ 2741 2742 2742 2743 2754 2755 2773 2775 2781 2799 2799 2800 2817 2824
+ 2840 2840 2849 2851 2851 2852 2852 2855 2855 2856 2857 2857 2857 2867
+ 2871 2873 2873 2873 2880 2886 2890 2892 2903 2944 2945 2954 2960 2969
+ 2989]
+v_test_idx: 533
+[1906 2663 1886 1238  778 1589 1068 1589  444  515  830 1166  937 2972
+ 1009  590  647  802  830  974  975 1643 1708 1759 2122 2322 2812 2815
+ 2893 2911 1906 1127 1181 1199 1223 2403 2821 1108 2543 2564 1024 1192
+ 1214 1808 2138 2169 2220 2406 2772 2961 1000 1398 2849 1589 1842 2972
+ 2663 1139 1565 2552 1759  959 2972 2412 2178 2663  490  947 1842 1066
+ 1471 2488 1997  244 1842  943 2377 1589 2761 1199  109  200 2476 2666
+ 2689 2972 2663  274 2741 1906 2806  594  969 2663  900 1842 2488  778
+  846 2675 2518  102 2663 1842 1121 2972  173  257  634 1779  778 2724
+ 2925 1040 1589 2488 1844 2538 2924 2972  292  559  830 1481 1857 2635
+ 2731 1754 2478  700  901 1902  778  181 2176 2663 1864 2496  658 1310
+  319  909 1107  532 1176 1533 2069  234 2280 2366 1580 2851 2732   30
+  393 1046 1468 1618 1779 2230 2415 2552 2983 1198 2538 1842  292 1198
+ 1766 1121 2480  490  760 1779 2480 2552 2964 1690 1817 2129  686 1464
+ 2541  769 2461  166  287  525  558  744 1127 1141 1478 2538 1387 1997
+ 2127 2664 2890 1589 2663  440  884 2514 1842 1996 1141 1790 1797 2488
+ 2496 1743 2369 1589 1997 1449 1779 1779 2456 1589  564  932 1370 1565
+ 2783  244 1565 1842 1996 1246   76 1842   77  231 1130 1498 1589 2488
+ 2972 1315 1842 1842 1445 2535 2663  166 1997 1565  647  647  468 2689
+  728 2129  201 1589 2761 1634  647  697 1076 1614 1648 1699 1906 1996
+ 2255 2257 2476 2538 2541  166  736 1990 2663 2686 2088  344 2663  854
+ 2011 1534  251  344 1906 2860 2849  355 1198 1285 1321 1353 2195 2511
+ 1589 1997  736 1445 1844 1997 2079 2663 2797 2962 2983 1075 1481 1773
+ 2520 1779  738 1158 2105  647 1126 2552 2189  773  830 1618 2488 2518
+  208  411 1476  879 2675 1589  344 2538 1481  200  211 2488  686 2130
+  740 1997 1589  858 2356 2663 1589 1842  686 1589 1997  208  399  555
+ 1029 1048 1842  375  830 2538 1618  666 2359 2384 1997  344 1657 2429
+  715 1589 1997 2511 1842  778 1607 2663 1447 1997 1130 1589 1665  686
+  792 2723  899  830  801  715 2663  525  113 2801 2663  208 1842  244
+  813 2429 2663 2865  830  423  517   45  697 2141  115 2663 2535 1589
+  932 1557 2417 2691 2993   80   87  466 1481 2891  116 1075 2973  642
+  959  773 1633 2663 2663 2181  830 2972 1589  742 2663 1695 1842 2924
+ 1108 1476 1199 2535 2972  738 2663 2089 2538 1997 2488 1997  830 2663
+ 2972 1065 1883 1102 2885  778 2297 1973 1158  580 1103  943 1082  344
+ 1054 1656 1973 2478 2529 2535 1349    6 2129 1046 1044 2518 2084 1317
+ 1589 2552 1842 1013 1499 2663  448 2552   76  596 2549 1476  778 1108
+ 2129  561 1239 2663 1447 1589 2892  344 1842  783 1919  253 2663 2663
+  641 2815 2972 1296 1972 1883 2972  263  539 2972 1332 1936 2141 2181
+ 1365  715 1384 1494 1216 2294 2503 2684 1540 2535 2294 2663 1997 1481
+ 2141]
+class_values: 71
+[  1.   4.   6.  10.  11.  13.  16.  17.  19.  20.  23.  25.  28.  30.
+  31.  32.  34.  36.  39.  40.  41.  42.  43.  44.  47.  49.  50.  52.
+  53.  54.  58.  59.  60.  61.  63.  64.  65.  66.  67.  68.  69.  70.
+  71.  72.  73.  74.  75.  76.  77.  78.  79.  80.  81.  82.  83.  84.
+  85.  86.  87.  88.  89.  90.  91.  92.  93.  94.  95.  96.  98.  99.
+ 100.]
+number of users =  1357
+number of items =  1363
+train size 4802 , test size 533 , all size 5335
+train u_size 4802 v_size 4802; test u_size 533 v_size 533; 
+......
+All rating pairs : 5335
+	All train rating pairs : 4802
+		Train rating pairs : 4321
+		Valid rating pairs : 481
+	Test rating pairs  : 533
+user and item number:
+1357
+1363
+Total user number = 1357, movie number = 1363
+Feature dim: 
+user: (1357, 1357)
+movie: (1363, 1363)
+v: 0.0
+v: 1.0
+v: 2.0
+v: 3.0
+v: 4.0
+v: 5.0
+v: 6.0
+v: 7.0
+v: 9.0
+v: 10.0
+v: 11.0
+v: 12.0
+v: 13.0
+v: 14.0
+v: 15.0
+v: 16.0
+v: 17.0
+v: 18.0
+v: 19.0
+v: 20.0
+v: 21.0
+v: 22.0
+v: 23.0
+v: 24.0
+v: 26.0
+v: 27.0
+v: 28.0
+v: 29.0
+v: 30.0
+v: 31.0
+v: 32.0
+v: 33.0
+v: 34.0
+v: 35.0
+v: 36.0
+v: 37.0
+v: 38.0
+v: 39.0
+v: 40.0
+v: 41.0
+v: 43.0
+v: 44.0
+v: 45.0
+v: 46.0
+v: 47.0
+v: 48.0
+v: 49.0
+v: 50.0
+v: 51.0
+v: 52.0
+v: 53.0
+v: 54.0
+v: 55.0
+v: 56.0
+v: 57.0
+v: 58.0
+v: 59.0
+v: 60.0
+v: 61.0
+v: 62.0
+v: 63.0
+v: 64.0
+v: 65.0
+v: 66.0
+v: 67.0
+v: 68.0
+v: 69.0
+v: 70.0
+enc graph AAA
+4321
+8642
+v: 0.0
+v: 1.0
+v: 2.0
+v: 3.0
+v: 4.0
+v: 5.0
+v: 6.0
+v: 7.0
+v: 9.0
+v: 10.0
+v: 11.0
+v: 12.0
+v: 13.0
+v: 14.0
+v: 15.0
+v: 16.0
+v: 17.0
+v: 18.0
+v: 19.0
+v: 20.0
+v: 21.0
+v: 22.0
+v: 23.0
+v: 24.0
+v: 26.0
+v: 27.0
+v: 28.0
+v: 29.0
+v: 30.0
+v: 31.0
+v: 32.0
+v: 33.0
+v: 34.0
+v: 35.0
+v: 36.0
+v: 37.0
+v: 38.0
+v: 39.0
+v: 40.0
+v: 41.0
+v: 43.0
+v: 44.0
+v: 45.0
+v: 46.0
+v: 47.0
+v: 48.0
+v: 49.0
+v: 50.0
+v: 51.0
+v: 52.0
+v: 53.0
+v: 54.0
+v: 55.0
+v: 56.0
+v: 57.0
+v: 58.0
+v: 59.0
+v: 60.0
+v: 61.0
+v: 62.0
+v: 63.0
+v: 64.0
+v: 65.0
+v: 66.0
+v: 67.0
+v: 68.0
+v: 69.0
+v: 70.0
+enc graph AAA
+4802
+9602
+Train enc graph: 	#user:1357	#movie:1363	#pairs:4321
+Train dec graph: 	#user:1357	#movie:1363	#pairs:4321
+Valid enc graph: 	#user:1357	#movie:1363	#pairs:4321
+Valid dec graph: 	#user:1357	#movie:1363	#pairs:481
+Test enc graph: 	#user:1357	#movie:1363	#pairs:4801
+Test dec graph: 	#user:1357	#movie:1363	#pairs:533
+Loading data finished ...
+
+Loading network finished ...
+
+Start training ...
+Total #Param of net: 314698536
+Total Param Number: 314698536
+Params:
+	encoder.ufc.weight: torch.Size([75, 1700]), 127500
+	encoder.ufc.bias: torch.Size([75]), 75
+	encoder.ifc.weight: torch.Size([75, 1700]), 127500
+	encoder.ifc.bias: torch.Size([75]), 75
+	encoder.conv.mods.0_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.10_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.11_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.12_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.13_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.14_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.15_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.16_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.17_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.18_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.19_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.1_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.20_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.21_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.22_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.23_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.24_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.26_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.27_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.28_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.29_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.2_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.30_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.31_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.32_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.33_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.34_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.35_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.36_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.37_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.38_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.39_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.3_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.40_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.41_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.43_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.44_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.45_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.46_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.47_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.48_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.49_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.4_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.50_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.51_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.52_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.53_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.54_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.55_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.56_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.57_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.58_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.59_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.5_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.60_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.61_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.62_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.63_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.64_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.65_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.66_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.67_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.68_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.69_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.6_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.70_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.7_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.9_0.weight: torch.Size([1357, 1700]), 2306900
+	encoder.conv.mods.rev-0_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-10_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-11_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-12_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-13_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-14_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-15_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-16_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-17_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-18_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-19_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-1_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-20_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-21_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-22_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-23_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-24_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-26_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-27_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-28_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-29_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-2_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-30_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-31_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-32_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-33_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-34_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-35_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-36_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-37_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-38_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-39_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-3_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-40_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-41_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-43_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-44_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-45_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-46_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-47_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-48_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-49_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-4_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-50_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-51_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-52_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-53_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-54_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-55_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-56_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-57_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-58_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-59_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-5_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-60_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-61_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-62_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-63_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-64_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-65_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-66_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-67_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-68_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-69_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-6_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-70_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-7_0.weight: torch.Size([1363, 1700]), 2317100
+	encoder.conv.mods.rev-9_0.weight: torch.Size([1363, 1700]), 2317100
+	decoder.Ps.0: torch.Size([75, 75]), 5625
+	decoder.Ps.1: torch.Size([75, 75]), 5625
+	decoder.combine_basis.weight: torch.Size([68, 2]), 136
+Net(
+  (_act): LeakyReLU(negative_slope=0.1)
+  (encoder): GCMCLayer(
+    (ufc): Linear(in_features=1700, out_features=75, bias=True)
+    (ifc): Linear(in_features=1700, out_features=75, bias=True)
+    (dropout): Dropout(p=0.7, inplace=False)
+    (W_r): None
+    (conv): HeteroGraphConv(
+      (mods): ModuleDict(
+        (0_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (10_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (11_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (12_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (13_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (14_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (15_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (16_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (17_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (18_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (19_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (1_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (20_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (21_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (22_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (23_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (24_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (26_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (27_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (28_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (29_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (2_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (30_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (31_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (32_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (33_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (34_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (35_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (36_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (37_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (38_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (39_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (3_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (40_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (41_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (43_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (44_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (45_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (46_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (47_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (48_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (49_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (4_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (50_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (51_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (52_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (53_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (54_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (55_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (56_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (57_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (58_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (59_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (5_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (60_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (61_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (62_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (63_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (64_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (65_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (66_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (67_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (68_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (69_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (6_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (70_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (7_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (9_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-0_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-10_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-11_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-12_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-13_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-14_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-15_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-16_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-17_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-18_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-19_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-1_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-20_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-21_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-22_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-23_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-24_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-26_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-27_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-28_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-29_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-2_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-30_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-31_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-32_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-33_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-34_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-35_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-36_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-37_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-38_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-39_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-3_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-40_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-41_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-43_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-44_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-45_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-46_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-47_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-48_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-49_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-4_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-50_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-51_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-52_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-53_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-54_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-55_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-56_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-57_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-58_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-59_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-5_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-60_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-61_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-62_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-63_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-64_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-65_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-66_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-67_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-68_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-69_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-6_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-70_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-7_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+        (rev-9_0): GCMCGraphConv(
+          (dropout): Dropout(p=0.7, inplace=False)
+        )
+      )
+    )
+    (agg_act): LeakyReLU(negative_slope=0.1)
+  )
+  (decoder): BiDecoder(
+    (dropout): Dropout(p=0.0, inplace=False)
+    (Ps): ParameterList(
+        (0): Parameter containing: [torch.FloatTensor of size 75x75]
+        (1): Parameter containing: [torch.FloatTensor of size 75x75]
+    )
+    (combine_basis): Linear(in_features=2, out_features=68, bias=False)
+  )
+)
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/numpy/lib/function_base.py:393: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis)
+/Users/hexiaonan/anaconda3/lib/python3.8/site-packages/numpy/core/_methods.py:161: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+Iter=1, loss=4.2192, rmse=455.1198, time=nan,	Val RMSE=21.1998, Test RMSE=21.4446
+Iter=2, loss=4.1852, rmse=476.5969, time=nan,	Val RMSE=23.0622
+Iter=3, loss=4.1930, rmse=628.4922, time=nan,	Val RMSE=22.0762
+Iter=4, loss=4.1589, rmse=515.2249, time=32.2036,	Val RMSE=21.1879, Test RMSE=21.4175
+Iter=5, loss=4.1207, rmse=464.2441, time=31.1161,	Val RMSE=22.0138
+Iter=6, loss=4.0632, rmse=508.7023, time=31.7052,	Val RMSE=22.7952
+Iter=7, loss=3.9917, rmse=543.9905, time=32.4734,	Val RMSE=22.2203
+Iter=8, loss=3.9239, rmse=513.3611, time=32.1305,	Val RMSE=21.4107
+Iter=9, loss=3.8577, rmse=455.5542, time=31.1203,	Val RMSE=21.0227, Test RMSE=21.2371
+Iter=10, loss=3.7823, rmse=440.4944, time=30.6615,	Val RMSE=20.9696, Test RMSE=21.1195
+Iter=11, loss=3.7022, rmse=430.8495, time=30.5208,	Val RMSE=20.7622, Test RMSE=20.9555
+Iter=12, loss=3.6271, rmse=413.8377, time=30.5139,	Val RMSE=20.1419, Test RMSE=20.4150
+Iter=13, loss=3.5481, rmse=401.0216, time=30.2497,	Val RMSE=19.5906, Test RMSE=19.9383
+Iter=14, loss=3.4694, rmse=384.6584, time=29.8070,	Val RMSE=19.2040, Test RMSE=19.7070
+Iter=15, loss=3.4076, rmse=349.6707, time=29.6153,	Val RMSE=19.4499
+Iter=16, loss=3.3462, rmse=386.0714, time=29.4276,	Val RMSE=19.1276, Test RMSE=19.7613
+Iter=17, loss=3.2807, rmse=380.3061, time=30.4495,	Val RMSE=19.3616
+Iter=18, loss=3.2240, rmse=394.7470, time=31.2936,	Val RMSE=19.2240
+Iter=19, loss=3.1682, rmse=381.4598, time=30.9356,	Val RMSE=19.1418
+Iter=20, loss=3.1186, rmse=410.0529, time=30.5622,	Val RMSE=18.7769, Test RMSE=19.0679
+Iter=21, loss=3.0632, rmse=382.2971, time=30.2212,	Val RMSE=18.8451
+Iter=22, loss=3.0207, rmse=384.3536, time=30.1866,	Val RMSE=18.7154, Test RMSE=18.8244
+Iter=23, loss=2.9876, rmse=398.3071, time=30.3018,	Val RMSE=18.5577, Test RMSE=18.6891
+Iter=24, loss=2.9621, rmse=376.3234, time=30.2338,	Val RMSE=18.7742
+Iter=25, loss=2.9284, rmse=358.4585, time=30.2393,	Val RMSE=19.5078
+Iter=26, loss=2.9008, rmse=378.0103, time=30.3087,	Val RMSE=19.0962
+Iter=27, loss=2.8710, rmse=344.6124, time=30.4452,	Val RMSE=18.4301, Test RMSE=18.4985
+Iter=28, loss=2.8468, rmse=341.6550, time=30.4032,	Val RMSE=18.1763, Test RMSE=18.1334
+Iter=29, loss=2.8260, rmse=342.4592, time=30.1437,	Val RMSE=18.1753, Test RMSE=18.1212
+Iter=30, loss=2.7927, rmse=347.5638, time=29.9731,	Val RMSE=18.1095, Test RMSE=18.1706
+Iter=31, loss=2.7689, rmse=325.8666, time=29.7626,	Val RMSE=18.3561
+Iter=32, loss=2.7410, rmse=343.0281, time=29.5529,	Val RMSE=18.5458
+Iter=33, loss=2.7175, rmse=359.5239, time=29.5003,	Val RMSE=18.6225
+Iter=34, loss=2.6980, rmse=361.8526, time=29.3340,	Val RMSE=18.6149
+Iter=35, loss=2.6806, rmse=363.4328, time=29.2422,	Val RMSE=18.4242
+Iter=36, loss=2.6633, rmse=351.3233, time=29.1677,	Val RMSE=18.2535
+Iter=37, loss=2.6443, rmse=327.9565, time=29.0634,	Val RMSE=18.2701
+Iter=38, loss=2.6250, rmse=332.6888, time=29.0016,	Val RMSE=18.3304
+Iter=39, loss=2.6058, rmse=336.3311, time=28.9257,	Val RMSE=18.1735
+Iter=40, loss=2.5933, rmse=334.8314, time=28.8957,	Val RMSE=18.0197, Test RMSE=17.8442
+Iter=41, loss=2.5807, rmse=327.1486, time=28.8330,	Val RMSE=17.9534, Test RMSE=17.8578
+Iter=42, loss=2.5667, rmse=334.0156, time=28.8369,	Val RMSE=17.9412, Test RMSE=17.9812
+Iter=43, loss=2.5487, rmse=325.2792, time=28.7630,	Val RMSE=17.9209, Test RMSE=17.9593
+Iter=44, loss=2.5331, rmse=302.5816, time=28.6631,	Val RMSE=17.9839
+Iter=45, loss=2.5182, rmse=321.7042, time=28.5594,	Val RMSE=17.9853
+Iter=46, loss=2.5038, rmse=326.0983, time=28.5065,	Val RMSE=18.0485
+Iter=47, loss=2.4891, rmse=316.0984, time=28.4358,	Val RMSE=18.1608
+Iter=48, loss=2.4748, rmse=324.4675, time=28.3283,	Val RMSE=18.3496
+Iter=49, loss=2.4661, rmse=339.8428, time=28.2443,	Val RMSE=18.1447
+Iter=50, loss=2.4523, rmse=321.0388, time=28.1859,	Val RMSE=18.2075
+Iter=51, loss=2.4404, rmse=343.6445, time=28.1198,	Val RMSE=18.2017
+Iter=52, loss=2.4291, rmse=340.1777, time=28.0977,	Val RMSE=18.0553
+Iter=53, loss=2.4197, rmse=354.0562, time=28.1122,	Val RMSE=17.9681
+Iter=54, loss=2.4088, rmse=316.6253, time=28.1536,	Val RMSE=18.1040
+Iter=55, loss=2.3992, rmse=327.3081, time=28.0958,	Val RMSE=18.1438
+Iter=56, loss=2.3889, rmse=331.1932, time=28.0552,	Val RMSE=18.0463
+Iter=57, loss=2.3802, rmse=321.7206, time=28.0185,	Val RMSE=18.0044
+Iter=58, loss=2.3692, rmse=308.0984, time=27.9979,	Val RMSE=18.0514
+Iter=59, loss=2.3630, rmse=329.6827, time=27.9668,	Val RMSE=18.0803
+Iter=60, loss=2.3515, rmse=305.2080, time=27.9118,	Val RMSE=18.1260
+Iter=61, loss=2.3414, rmse=315.6338, time=27.8860,	Val RMSE=18.0709
+Iter=62, loss=2.3305, rmse=306.5661, time=27.8751,	Val RMSE=17.9894
+Iter=63, loss=2.3204, rmse=302.4316, time=27.8621,	Val RMSE=18.0013
+Iter=64, loss=2.3118, rmse=312.8074, time=27.8587,	Val RMSE=18.0555
+Iter=65, loss=2.3030, rmse=319.4163, time=27.8525,	Val RMSE=18.0519
+Iter=66, loss=2.2941, rmse=326.2481, time=27.8332,	Val RMSE=18.0619
+Iter=67, loss=2.2894, rmse=334.9829, time=27.7853,	Val RMSE=18.0495
+Iter=68, loss=2.2893, rmse=329.4758, time=27.7892,	Val RMSE=17.9755
+Iter=69, loss=2.2834, rmse=315.8974, time=27.7518,	Val RMSE=17.9352
+Iter=70, loss=2.2752, rmse=307.9113, time=27.7256,	Val RMSE=17.8628, Test RMSE=17.9969
+Iter=71, loss=2.2670, rmse=315.4281, time=27.6299,	Val RMSE=17.9044
+Iter=72, loss=2.2588, rmse=311.4264, time=27.5566,	Val RMSE=18.0569
+Iter=73, loss=2.2510, rmse=323.0978, time=27.5348,	Val RMSE=17.9854
+Iter=74, loss=2.2459, rmse=322.3630, time=27.5100,	Val RMSE=17.8899
+Iter=75, loss=2.2392, rmse=321.5984, time=27.5258,	Val RMSE=17.9690
+Iter=76, loss=2.2321, rmse=316.0666, time=27.5097,	Val RMSE=18.1263
+Iter=77, loss=2.2256, rmse=314.5470, time=27.5031,	Val RMSE=18.3263
+Iter=78, loss=2.2202, rmse=319.2496, time=27.5193,	Val RMSE=18.2898
+Iter=79, loss=2.2147, rmse=323.7823, time=27.5038,	Val RMSE=18.2348
+Iter=80, loss=2.2084, rmse=319.8531, time=27.5200,	Val RMSE=18.2286
+Iter=81, loss=2.2056, rmse=327.0928, time=27.5489,	Val RMSE=18.0835
+Iter=82, loss=2.1992, rmse=311.9865, time=27.5386,	Val RMSE=17.8969
+Iter=83, loss=2.1943, rmse=324.6720, time=27.5635,	Val RMSE=17.9654
+Iter=84, loss=2.1894, rmse=322.8918, time=27.5688,	Val RMSE=18.0953
+Iter=85, loss=2.1852, rmse=327.0527, time=27.5838,	Val RMSE=17.9234
+Iter=86, loss=2.1817, rmse=313.1620, time=27.5390,	Val RMSE=17.7813, Test RMSE=18.0644
+Iter=87, loss=2.1780, rmse=318.6032, time=27.4873,	Val RMSE=17.8424
+Iter=88, loss=2.1745, rmse=328.8000, time=27.4733,	Val RMSE=17.7884
+Iter=89, loss=2.1804, rmse=348.9020, time=27.4563,	Val RMSE=17.7690, Test RMSE=17.9575
+Iter=90, loss=2.1751, rmse=327.7388, time=27.4200,	Val RMSE=17.8226
+Iter=91, loss=2.1695, rmse=304.2463, time=27.4409,	Val RMSE=17.9643
+Iter=92, loss=2.1642, rmse=311.5822, time=27.4180,	Val RMSE=18.1333
+Iter=93, loss=2.1591, rmse=312.8501, time=27.4427,	Val RMSE=18.0394
+Iter=94, loss=2.1554, rmse=323.8696, time=27.4201,	Val RMSE=18.0352
+Iter=95, loss=2.1527, rmse=312.7589, time=27.4321,	Val RMSE=18.2241
+Iter=96, loss=2.1487, rmse=335.5927, time=27.4492,	Val RMSE=18.2913
+Iter=97, loss=2.1465, rmse=337.2488, time=27.4818,	Val RMSE=18.1451
+Iter=98, loss=2.1428, rmse=334.9432, time=27.4955,	Val RMSE=18.0166
+Iter=99, loss=2.1421, rmse=306.0387, time=27.4883,	Val RMSE=18.0106
+Iter=100, loss=2.1371, rmse=317.3283, time=27.5162,	Val RMSE=18.0298
+Iter=101, loss=2.1323, rmse=307.0938, time=27.4868,	Val RMSE=17.9703
+Iter=102, loss=2.1273, rmse=315.4906, time=27.5107,	Val RMSE=17.8450
+Iter=103, loss=2.1223, rmse=304.2501, time=27.5307,	Val RMSE=17.7860
+Iter=104, loss=2.1170, rmse=304.5995, time=27.5780,	Val RMSE=17.8118
+Iter=105, loss=2.1123, rmse=312.0344, time=27.5713,	Val RMSE=17.8322
+Iter=106, loss=2.1071, rmse=309.7094, time=27.5994,	Val RMSE=17.8744
+Iter=107, loss=2.1014, rmse=295.3874, time=27.6044,	Val RMSE=17.9423
+Iter=108, loss=2.0966, rmse=319.7916, time=27.6358,	Val RMSE=17.9821
+Iter=109, loss=2.0927, rmse=316.5780, time=27.6600,	Val RMSE=17.9187
+Iter=110, loss=2.0881, rmse=314.4794, time=27.6835,	Val RMSE=17.9300
+Iter=111, loss=2.0833, rmse=310.9981, time=27.7007,	Val RMSE=17.8507
+Iter=112, loss=2.0805, rmse=323.5785, time=27.7043,	Val RMSE=17.8034
+Iter=113, loss=2.0766, rmse=314.3126, time=27.7129,	Val RMSE=17.8764
+Iter=114, loss=2.0738, rmse=315.0065, time=27.7402,	Val RMSE=17.9258
+Iter=115, loss=2.0699, rmse=310.8080, time=27.7530,	Val RMSE=17.9477
+Iter=116, loss=2.0667, rmse=304.9177, time=27.7572,	Val RMSE=18.1034
+Iter=117, loss=2.0641, rmse=320.9403, time=27.7780,	Val RMSE=18.2812
+Iter=118, loss=2.0598, rmse=299.3682, time=27.7913,	Val RMSE=18.4103
+Iter=119, loss=2.0551, rmse=311.5465, time=27.7579,	Val RMSE=18.3865
+Iter=120, loss=2.0520, rmse=309.5157, time=27.7541,	Val RMSE=18.3658
+Iter=121, loss=2.0480, rmse=304.1579, time=27.7430,	Val RMSE=18.2622
+Iter=122, loss=2.0440, rmse=298.5929, time=27.7440,	Val RMSE=18.1881
+Iter=123, loss=2.0399, rmse=292.2868, time=27.7637,	Val RMSE=18.1399
+Iter=124, loss=2.0365, rmse=322.9251, time=27.7552,	Val RMSE=18.0434
+Iter=125, loss=2.0325, rmse=293.9049, time=27.7597,	Val RMSE=17.9791
+Iter=126, loss=2.0283, rmse=309.9325, time=27.7808,	Val RMSE=18.0475
+Iter=127, loss=2.0240, rmse=297.5586, time=27.7830,	Val RMSE=18.1215
+Iter=128, loss=2.0202, rmse=308.6770, time=27.7853,	Val RMSE=18.0880
+Iter=129, loss=2.0172, rmse=315.1971, time=27.7639,	Val RMSE=18.0025
+Iter=130, loss=2.0138, rmse=306.9464, time=27.7693,	Val RMSE=18.0505
+Iter=131, loss=2.0110, rmse=310.1678, time=27.7687,	Val RMSE=18.3996
+Iter=132, loss=2.0082, rmse=322.8324, time=27.7455,	Val RMSE=18.4244
+Iter=133, loss=2.0054, rmse=329.4092, time=27.7514,	Val RMSE=18.1081
+Iter=134, loss=2.0025, rmse=308.7776, time=27.7556,	Val RMSE=17.8995
+Iter=135, loss=1.9989, rmse=307.6388, time=27.7674,	Val RMSE=17.9061
+Iter=136, loss=1.9953, rmse=312.2834, time=27.7864,	Val RMSE=17.9418
+Iter=137, loss=1.9920, rmse=327.0025, time=27.7957,	Val RMSE=17.9449
+Iter=138, loss=1.9892, rmse=316.1261, time=27.8086,	Val RMSE=17.9348
+Iter=139, loss=1.9857, rmse=297.8024, time=27.8160,	Val RMSE=17.9526
+Iter=140, loss=1.9818, rmse=300.2244, time=27.8164,	Val RMSE=17.9914
+Iter=141, loss=1.9783, rmse=306.3254, time=27.8267,	Val RMSE=18.0089
+Iter=142, loss=1.9746, rmse=280.2547, time=27.8236,	Val RMSE=18.0529
+Iter=143, loss=1.9704, rmse=295.6377, time=27.8374,	Val RMSE=18.0566
+Iter=144, loss=1.9668, rmse=301.9566, time=27.8429,	Val RMSE=18.0319
+Iter=145, loss=1.9627, rmse=286.2635, time=27.8590,	Val RMSE=17.9820
+Iter=146, loss=1.9585, rmse=289.7758, time=27.8281,	Val RMSE=17.9726
+Iter=147, loss=1.9549, rmse=319.6477, time=27.8293,	Val RMSE=17.9724
+Iter=148, loss=1.9511, rmse=303.2895, time=27.8392,	Val RMSE=17.9637
+Iter=149, loss=1.9482, rmse=328.6141, time=27.8291,	Val RMSE=17.9386
+Iter=150, loss=1.9447, rmse=301.2343, time=27.8323,	Val RMSE=17.9459
+Iter=151, loss=1.9413, rmse=306.6057, time=27.8403,	Val RMSE=18.0095
+Iter=152, loss=1.9374, rmse=285.0927, time=27.8241,	Val RMSE=18.0731
+Iter=153, loss=1.9337, rmse=270.2206, time=27.8241,	Val RMSE=18.0444
+Iter=154, loss=1.9303, rmse=297.8474, time=27.8410,	Val RMSE=17.9499
+Iter=155, loss=1.9269, rmse=283.4904, time=27.8431,	Val RMSE=17.8471
+Iter=156, loss=1.9228, rmse=275.1700, time=27.8561,	Val RMSE=17.8209
+Iter=157, loss=1.9199, rmse=292.8521, time=27.8542,	Val RMSE=17.8774
+Iter=158, loss=1.9163, rmse=287.3867, time=27.8654,	Val RMSE=17.9391
+Iter=159, loss=1.9124, rmse=274.6094, time=27.8719,	Val RMSE=18.0108
+Iter=160, loss=1.9093, rmse=301.6174, time=27.8711,	Val RMSE=18.1119
+Iter=161, loss=1.9058, rmse=287.6273, time=27.8838,	Val RMSE=18.2059
+Iter=162, loss=1.9024, rmse=272.7903, time=27.8796,	Val RMSE=18.2610
+Iter=163, loss=1.8990, rmse=271.8541, time=27.8841,	Val RMSE=18.1988
+Iter=164, loss=1.8959, rmse=296.0347, time=27.8698,	Val RMSE=18.0562
+Iter=165, loss=1.8920, rmse=267.2393, time=27.8817,	Val RMSE=17.9504
+Iter=166, loss=1.8884, rmse=285.6329, time=27.8749,	Val RMSE=17.8747
+Iter=167, loss=1.8853, rmse=291.0882, time=27.8839,	Val RMSE=17.8598
+Iter=168, loss=1.8825, rmse=294.1086, time=27.8865,	Val RMSE=17.9039
+Iter=169, loss=1.8791, rmse=271.3849, time=27.8831,	Val RMSE=17.9810
+Iter=170, loss=1.8755, rmse=274.8133, time=27.8841,	Val RMSE=18.0267
+Iter=171, loss=1.8724, rmse=285.5975, time=27.8999,	Val RMSE=18.0519
+Iter=172, loss=1.8687, rmse=268.2163, time=27.9060,	Val RMSE=18.0087
+Iter=173, loss=1.8657, rmse=289.0082, time=27.9106,	Val RMSE=18.0204
+Iter=174, loss=1.8627, rmse=284.2412, time=27.9280,	Val RMSE=18.0833
+Iter=175, loss=1.8596, rmse=280.6888, time=27.9314,	Val RMSE=18.2270
+Iter=176, loss=1.8561, rmse=280.9154, time=27.9377,	Val RMSE=18.3207
+Iter=177, loss=1.8529, rmse=273.9433, time=27.9486,	Val RMSE=18.2961
+Iter=178, loss=1.8500, rmse=283.6394, time=27.9456,	Val RMSE=18.1665
+Iter=179, loss=1.8468, rmse=259.0728, time=27.9376,	Val RMSE=18.0395
+Iter=180, loss=1.8441, rmse=266.8956, time=27.9539,	Val RMSE=17.9252
+Iter=181, loss=1.8411, rmse=268.4035, time=27.9531,	Val RMSE=17.8666
+Iter=182, loss=1.8381, rmse=277.0433, time=27.9598,	Val RMSE=17.9183
+Iter=183, loss=1.8348, rmse=275.5488, time=27.9712,	Val RMSE=17.9667
+Iter=184, loss=1.8320, rmse=263.3599, time=27.9857,	Val RMSE=17.9709
+Iter=185, loss=1.8290, rmse=268.4233, time=27.9746,	Val RMSE=17.9616
+Iter=186, loss=1.8259, rmse=273.1082, time=27.9820,	Val RMSE=17.9576
+Iter=187, loss=1.8232, rmse=275.4287, time=27.9924,	Val RMSE=17.9335
+Iter=188, loss=1.8201, rmse=263.2012, time=28.0087,	Val RMSE=17.8589
+Iter=189, loss=1.8170, rmse=265.6805, time=28.0086,	Val RMSE=17.8043
+Iter=190, loss=1.8140, rmse=264.5991, time=28.0134,	Val RMSE=17.8181
+Iter=191, loss=1.8113, rmse=274.8970, time=28.0208,	Val RMSE=17.8953
+Iter=192, loss=1.8090, rmse=275.5708, time=28.0231,	Val RMSE=17.9162
+Iter=193, loss=1.8066, rmse=286.9695, time=28.0321,	Val RMSE=17.9112
+Iter=194, loss=1.8038, rmse=270.9538, time=28.0289,	Val RMSE=17.8810
+Iter=195, loss=1.8011, rmse=277.9134, time=28.0284,	Val RMSE=17.8120
+Iter=196, loss=1.7985, rmse=289.7476, time=28.0520,	Val RMSE=17.7835
+Iter=197, loss=1.7954, rmse=275.0658, time=28.0580,	Val RMSE=17.7778
+Iter=198, loss=1.7923, rmse=263.5291, time=28.0706,	Val RMSE=17.7961
+Iter=199, loss=1.7899, rmse=269.1151, time=28.0839,	Val RMSE=17.8367
+Iter=200, loss=1.7872, rmse=266.4250, time=28.0831,	Val RMSE=17.9093
+Iter=201, loss=1.7845, rmse=272.0338, time=28.0891,	Val RMSE=18.0030
+Iter=202, loss=1.7821, rmse=268.6106, time=28.0924,	Val RMSE=18.0519
+Iter=203, loss=1.7794, rmse=257.6406, time=28.1049,	Val RMSE=18.0433
+Iter=204, loss=1.7771, rmse=278.2780, time=28.1129,	Val RMSE=17.9970
+Iter=205, loss=1.7748, rmse=270.6045, time=28.1393,	Val RMSE=17.9199
+Iter=206, loss=1.7723, rmse=269.4356, time=28.1398,	Val RMSE=17.8493
+Iter=207, loss=1.7697, rmse=264.2566, time=28.1964,	Val RMSE=17.7947
+Iter=208, loss=1.7672, rmse=263.3043, time=28.2143,	Val RMSE=17.7705
+Iter=209, loss=1.7647, rmse=266.9388, time=28.2993,	Val RMSE=17.7662, Test RMSE=18.0493
+Iter=210, loss=1.7623, rmse=262.3096, time=28.4082,	Val RMSE=17.7940
+Iter=211, loss=1.7600, rmse=271.6884, time=28.5007,	Val RMSE=17.8477
+Iter=212, loss=1.7578, rmse=269.3438, time=28.5601,	Val RMSE=17.9216
+Iter=213, loss=1.7554, rmse=266.8174, time=28.6322,	Val RMSE=17.9755
+Iter=214, loss=1.7528, rmse=263.5770, time=28.7053,	Val RMSE=17.9768
+Iter=215, loss=1.7505, rmse=259.2842, time=28.7734,	Val RMSE=17.9564
+Iter=216, loss=1.7479, rmse=245.8006, time=28.8456,	Val RMSE=17.9165
+Iter=217, loss=1.7452, rmse=241.0025, time=28.9077,	Val RMSE=17.9008
+Iter=218, loss=1.7427, rmse=262.0011, time=28.9801,	Val RMSE=17.8808
+Iter=219, loss=1.7400, rmse=243.4941, time=29.0327,	Val RMSE=17.8493
+Iter=220, loss=1.7376, rmse=259.8110, time=29.0878,	Val RMSE=17.8179
+Iter=221, loss=1.7352, rmse=260.0238, time=29.1526,	Val RMSE=17.8120
+Iter=222, loss=1.7328, rmse=262.5676, time=29.2106,	Val RMSE=17.8174
+Iter=223, loss=1.7305, rmse=254.1662, time=29.2371,	Val RMSE=17.8403
+Iter=224, loss=1.7284, rmse=262.1470, time=29.2674,	Val RMSE=17.8544
+Iter=225, loss=1.7262, rmse=241.2374, time=29.2685,	Val RMSE=17.8523
+Iter=226, loss=1.7238, rmse=254.7454, time=29.2663,	Val RMSE=17.8391
+Iter=227, loss=1.7218, rmse=260.2705, time=29.2787,	Val RMSE=17.8368
+Iter=228, loss=1.7197, rmse=262.3631, time=29.2928,	Val RMSE=17.8494
+Iter=229, loss=1.7174, rmse=260.3211, time=29.2945,	Val RMSE=17.8706
+Iter=230, loss=1.7149, rmse=244.2703, time=29.3009,	Val RMSE=17.9041
+Iter=231, loss=1.7128, rmse=270.2108, time=29.3105,	Val RMSE=17.9296
+Iter=232, loss=1.7109, rmse=264.0492, time=29.3198,	Val RMSE=17.9452
+Iter=233, loss=1.7085, rmse=254.2758, time=29.3297,	Val RMSE=17.9612
+Iter=234, loss=1.7065, rmse=269.7330, time=29.3372,	Val RMSE=17.9455
+Iter=235, loss=1.7043, rmse=252.2481, time=29.3418,	Val RMSE=17.9010
+Iter=236, loss=1.7023, rmse=252.6494, time=29.3428,	Val RMSE=17.8632
+Iter=237, loss=1.7001, rmse=252.3218, time=29.3391,	Val RMSE=17.8328
+Iter=238, loss=1.6981, rmse=257.8985, time=29.3482,	Val RMSE=17.7774
+Iter=239, loss=1.6959, rmse=263.6181, time=29.3574,	Val RMSE=17.7273, Test RMSE=18.1292
+Iter=240, loss=1.6938, rmse=253.3469, time=29.3356,	Val RMSE=17.7201, Test RMSE=18.1157
+Iter=241, loss=1.6916, rmse=241.2506, time=29.3320,	Val RMSE=17.7451
+Iter=242, loss=1.6893, rmse=235.1729, time=29.3285,	Val RMSE=17.7937
+Iter=243, loss=1.6872, rmse=251.7921, time=29.3101,	Val RMSE=17.8502
+Iter=244, loss=1.6850, rmse=251.4152, time=29.3128,	Val RMSE=17.8734
+Iter=245, loss=1.6829, rmse=249.6177, time=29.2918,	Val RMSE=17.8857
+Iter=246, loss=1.6807, rmse=252.5023, time=29.2703,	Val RMSE=17.8649
+Iter=247, loss=1.6783, rmse=219.4756, time=29.2598,	Val RMSE=17.8204
+Iter=248, loss=1.6763, rmse=245.6696, time=29.2644,	Val RMSE=17.8006
+Iter=249, loss=1.6743, rmse=259.8289, time=29.2622,	Val RMSE=17.7894
+Iter=250, loss=1.6723, rmse=248.7858, time=29.2385,	Val RMSE=17.8074
+Iter=251, loss=1.6705, rmse=260.6095, time=29.2425,	Val RMSE=17.8476
+Iter=252, loss=1.6685, rmse=250.2008, time=29.2402,	Val RMSE=17.8811
+Iter=253, loss=1.6665, rmse=239.6510, time=29.2336,	Val RMSE=17.8966
+Iter=254, loss=1.6647, rmse=253.1647, time=29.2392,	Val RMSE=17.8832
+Iter=255, loss=1.6628, rmse=247.9950, time=29.2349,	Val RMSE=17.8495
+Iter=256, loss=1.6608, rmse=253.3180, time=29.2345,	Val RMSE=17.8130
+Iter=257, loss=1.6588, rmse=238.9085, time=29.2308,	Val RMSE=17.7690
+Iter=258, loss=1.6568, rmse=249.3445, time=29.2382,	Val RMSE=17.7480
+Iter=259, loss=1.6549, rmse=241.1638, time=29.2359,	Val RMSE=17.7484
+Iter=260, loss=1.6527, rmse=228.9536, time=29.2306,	Val RMSE=17.7994
+Iter=261, loss=1.6508, rmse=239.2375, time=29.2463,	Val RMSE=17.8419
+Iter=262, loss=1.6491, rmse=241.0133, time=29.2380,	Val RMSE=17.8507
+Iter=263, loss=1.6474, rmse=239.9535, time=29.2153,	Val RMSE=17.8514
+Iter=264, loss=1.6456, rmse=244.3079, time=29.1992,	Val RMSE=17.8211
+Iter=265, loss=1.6438, rmse=253.2449, time=29.1949,	Val RMSE=17.7648
+Iter=266, loss=1.6418, rmse=236.1920, time=29.1966,	Val RMSE=17.7440
+Iter=267, loss=1.6402, rmse=248.1679, time=29.1881,	Val RMSE=17.7449
+Iter=268, loss=1.6385, rmse=250.9772, time=29.1764,	Val RMSE=17.7871
+Iter=269, loss=1.6368, rmse=241.9857, time=29.1754,	Val RMSE=17.8550
+Iter=270, loss=1.6347, rmse=238.8355, time=29.1687,	Val RMSE=17.8946
+Iter=271, loss=1.6331, rmse=240.6682, time=29.1745,	Val RMSE=17.9165
+Iter=272, loss=1.6314, rmse=240.9948, time=29.1647,	Val RMSE=17.9006
+Iter=273, loss=1.6298, rmse=250.9580, time=29.1644,	Val RMSE=17.8686
+Iter=274, loss=1.6281, rmse=238.4453, time=29.1640,	Val RMSE=17.8415
+Iter=275, loss=1.6262, rmse=246.3014, time=29.1601,	Val RMSE=17.8259
+Iter=276, loss=1.6245, rmse=253.3050, time=29.1640,	Val RMSE=17.8130
+Iter=277, loss=1.6226, rmse=238.6135, time=29.1585,	Val RMSE=17.8129
+Iter=278, loss=1.6211, rmse=257.9121, time=29.1555,	Val RMSE=17.8349
+Iter=279, loss=1.6193, rmse=234.6597, time=29.1575,	Val RMSE=17.8816
+Iter=280, loss=1.6176, rmse=237.6546, time=29.1494,	Val RMSE=17.9185
+Iter=281, loss=1.6157, rmse=246.9564, time=29.1460,	Val RMSE=17.9437
+Iter=282, loss=1.6138, rmse=228.4987, time=29.1606,	Val RMSE=17.9329
+Iter=283, loss=1.6122, rmse=233.0022, time=29.2199,	Val RMSE=17.8994
+Iter=284, loss=1.6107, rmse=256.3605, time=29.2617,	Val RMSE=17.8616
+Iter=285, loss=1.6090, rmse=230.8199, time=29.2820,	Val RMSE=17.8221
+Iter=286, loss=1.6073, rmse=239.7403, time=29.2793,	Val RMSE=17.7891
+Iter=287, loss=1.6056, rmse=221.5149, time=29.2706,	Val RMSE=17.7874
+Iter=288, loss=1.6041, rmse=252.4084, time=29.2693,	Val RMSE=17.7906
+Iter=289, loss=1.6022, rmse=219.8806, time=29.2682,	Val RMSE=17.8002
+Iter=290, loss=1.6008, rmse=254.6336, time=29.2676,	Val RMSE=17.8050
+Iter=291, loss=1.5993, rmse=229.3289, time=29.2673,	Val RMSE=17.8234
+Iter=292, loss=1.5977, rmse=242.5187, time=29.2735,	Val RMSE=17.8318
+Iter=293, loss=1.5962, rmse=241.1808, time=29.2807,	Val RMSE=17.8594
+Iter=294, loss=1.5947, rmse=238.7408, time=29.2781,	Val RMSE=17.8753
+Iter=295, loss=1.5930, rmse=221.4186, time=29.2640,	Val RMSE=17.8978
+Iter=296, loss=1.5915, rmse=234.4073, time=29.2524,	Val RMSE=17.8970
+Iter=297, loss=1.5898, rmse=241.7799, time=29.2507,	Val RMSE=17.8770
+Iter=298, loss=1.5884, rmse=245.7118, time=29.2437,	Val RMSE=17.8507
+Iter=299, loss=1.5869, rmse=241.4879, time=29.2509,	Val RMSE=17.8170
+Iter=300, loss=1.5856, rmse=244.9121, time=29.2306,	Val RMSE=17.8042
+Iter=301, loss=1.5839, rmse=238.7883, time=29.2342,	Val RMSE=17.8080
+Iter=302, loss=1.5823, rmse=226.8700, time=29.2399,	Val RMSE=17.8282
+Iter=303, loss=1.5809, rmse=225.8835, time=29.2379,	Val RMSE=17.8415
+Iter=304, loss=1.5794, rmse=246.0445, time=29.2308,	Val RMSE=17.8527
+Iter=305, loss=1.5780, rmse=238.7817, time=29.2233,	Val RMSE=17.8489
+Iter=306, loss=1.5766, rmse=237.5420, time=29.2262,	Val RMSE=17.8481
+Iter=307, loss=1.5751, rmse=220.1691, time=29.2240,	Val RMSE=17.8370
+Iter=308, loss=1.5736, rmse=217.7573, time=29.2202,	Val RMSE=17.8153
+Iter=309, loss=1.5719, rmse=222.5424, time=29.2230,	Val RMSE=17.7784
+Iter=310, loss=1.5705, rmse=247.3604, time=29.2133,	Val RMSE=17.7598
+Iter=311, loss=1.5689, rmse=230.1582, time=29.1945,	Val RMSE=17.7367
+Iter=312, loss=1.5673, rmse=211.7560, time=29.1960,	Val RMSE=17.7352
+Iter=313, loss=1.5658, rmse=231.6140, time=29.1860,	Val RMSE=17.7497
+Iter=314, loss=1.5644, rmse=222.7144, time=29.1810,	Val RMSE=17.7816
+Iter=315, loss=1.5629, rmse=222.5635, time=29.1669,	Val RMSE=17.7995
+Iter=316, loss=1.5614, rmse=223.2820, time=29.1600,	Val RMSE=17.8176
+Iter=317, loss=1.5601, rmse=229.5698, time=29.1641,	Val RMSE=17.8211
+Iter=318, loss=1.5588, rmse=239.5258, time=29.1672,	Val RMSE=17.8110
+Iter=319, loss=1.5574, rmse=237.2027, time=29.1488,	Val RMSE=17.7979
+Iter=320, loss=1.5560, rmse=226.9856, time=29.1439,	Val RMSE=17.8014
+Iter=321, loss=1.5545, rmse=226.4845, time=29.1449,	Val RMSE=17.8219
+Iter=322, loss=1.5530, rmse=224.1574, time=29.1457,	Val RMSE=17.8538
+Iter=323, loss=1.5518, rmse=243.5347, time=29.1283,	Val RMSE=17.8695
+Iter=324, loss=1.5504, rmse=228.5202, time=29.1171,	Val RMSE=17.8901
+Iter=325, loss=1.5490, rmse=233.6166, time=29.1150,	Val RMSE=17.8979
+Iter=326, loss=1.5477, rmse=235.7981, time=29.1047,	Val RMSE=17.9017
+Iter=327, loss=1.5463, rmse=240.4748, time=29.1074,	Val RMSE=17.9009
+Iter=328, loss=1.5449, rmse=220.6160, time=29.1090,	Val RMSE=17.9003
+Iter=329, loss=1.5437, rmse=232.4890, time=29.1075,	Val RMSE=17.8901
+Iter=330, loss=1.5426, rmse=249.8854, time=29.0961,	Val RMSE=17.8667
+Iter=331, loss=1.5412, rmse=234.6197, time=29.0937,	Val RMSE=17.8562
+Iter=332, loss=1.5397, rmse=217.8238, time=29.0894,	Val RMSE=17.8561
+Iter=333, loss=1.5384, rmse=235.1983, time=29.0922,	Val RMSE=17.8553
+Iter=334, loss=1.5372, rmse=223.5530, time=29.0930,	Val RMSE=17.8612
+Iter=335, loss=1.5358, rmse=223.3430, time=29.0868,	Val RMSE=17.8762
+Iter=336, loss=1.5345, rmse=229.2487, time=29.0818,	Val RMSE=17.8827
+Iter=337, loss=1.5332, rmse=230.0561, time=29.0699,	Val RMSE=17.8938
+Iter=338, loss=1.5320, rmse=226.2730, time=29.0559,	Val RMSE=17.8875
+Iter=339, loss=1.5309, rmse=243.7008, time=29.0494,	Val RMSE=17.8663
+Iter=340, loss=1.5295, rmse=225.7447, time=29.0505,	Val RMSE=17.8369
+Iter=341, loss=1.5283, rmse=230.3813, time=29.0547,	Val RMSE=17.8295
+Iter=342, loss=1.5269, rmse=227.0054, time=29.0465,	Val RMSE=17.8182
+Iter=343, loss=1.5254, rmse=205.4315, time=29.0457,	Val RMSE=17.8240
+Iter=344, loss=1.5241, rmse=228.1222, time=29.0389,	Val RMSE=17.8394
+Iter=345, loss=1.5230, rmse=229.2148, time=29.0408,	Val RMSE=17.8740
+Iter=346, loss=1.5218, rmse=236.0624, time=29.0359,	Val RMSE=17.9057
+Iter=347, loss=1.5205, rmse=227.1620, time=29.0376,	Val RMSE=17.9172
+Iter=348, loss=1.5193, rmse=236.2333, time=29.0370,	Val RMSE=17.9266
+Iter=349, loss=1.5183, rmse=232.9895, time=29.0377,	Val RMSE=17.9368
+Iter=350, loss=1.5170, rmse=219.1877, time=29.0261,	Val RMSE=17.9415
+Iter=351, loss=1.5158, rmse=214.7476, time=29.0281,	Val RMSE=17.9395
+Iter=352, loss=1.5145, rmse=233.6992, time=29.0202,	Val RMSE=17.9292
+Iter=353, loss=1.5132, rmse=216.1148, time=29.0153,	Val RMSE=17.9160
+Iter=354, loss=1.5120, rmse=234.3539, time=29.0068,	Val RMSE=17.9124
+Iter=355, loss=1.5106, rmse=219.4955, time=28.9937,	Val RMSE=17.9150
+Iter=356, loss=1.5094, rmse=220.0739, time=28.9906,	Val RMSE=17.9278
+Iter=357, loss=1.5080, rmse=216.7819, time=28.9798,	Val RMSE=17.9449
+Iter=358, loss=1.5069, rmse=232.6676, time=28.9801,	Val RMSE=17.9513
+Iter=359, loss=1.5058, rmse=211.9912, time=28.9794,	Val RMSE=17.9437
+Iter=360, loss=1.5045, rmse=217.5444, time=28.9715,	Val RMSE=17.9181
+Iter=361, loss=1.5032, rmse=224.4029, time=28.9635,	Val RMSE=17.8780
+Iter=362, loss=1.5020, rmse=226.7321, time=28.9665,	Val RMSE=17.8401
+Iter=363, loss=1.5009, rmse=233.0205, time=28.9688,	Val RMSE=17.8152
+Iter=364, loss=1.4998, rmse=230.9853, time=28.9741,	Val RMSE=17.8020
+Iter=365, loss=1.4986, rmse=227.7673, time=28.9613,	Val RMSE=17.8030
+Iter=366, loss=1.4973, rmse=205.0136, time=28.9635,	Val RMSE=17.8137
+Iter=367, loss=1.4961, rmse=231.1383, time=28.9669,	Val RMSE=17.8285
+Iter=368, loss=1.4949, rmse=219.1710, time=28.9640,	Val RMSE=17.8314
+Iter=369, loss=1.4939, rmse=237.0246, time=28.9568,	Val RMSE=17.8385
+Iter=370, loss=1.4927, rmse=222.2770, time=28.9589,	Val RMSE=17.8509
+Iter=371, loss=1.4915, rmse=216.2486, time=28.9616,	Val RMSE=17.8585
+Iter=372, loss=1.4905, rmse=238.4211, time=28.9658,	Val RMSE=17.8503
+Iter=373, loss=1.4896, rmse=240.3799, time=28.9670,	Val RMSE=17.8316
+Iter=374, loss=1.4886, rmse=237.3120, time=28.9649,	Val RMSE=17.8194
+Iter=375, loss=1.4875, rmse=212.2426, time=38.4591,	Val RMSE=17.8029
+Iter=376, loss=1.4864, rmse=234.5545, time=38.4174,	Val RMSE=17.7932
+Iter=377, loss=1.4852, rmse=217.8012, time=38.4103,	Val RMSE=17.7982
+Iter=378, loss=1.4842, rmse=235.5398, time=38.4153,	Val RMSE=17.8156
+Iter=379, loss=1.4831, rmse=237.1737, time=55.5358,	Val RMSE=17.8353
+Iter=380, loss=1.4821, rmse=223.2347, time=72.5774,	Val RMSE=17.8272
+Iter=381, loss=1.4811, rmse=232.3378, time=89.4897,	Val RMSE=17.8178
+Iter=382, loss=1.4800, rmse=210.3071, time=89.3220,	Val RMSE=17.7932
+Iter=383, loss=1.4789, rmse=220.9437, time=89.1838,	Val RMSE=17.7752
+Iter=384, loss=1.4777, rmse=202.8660, time=89.0376,	Val RMSE=17.7690
+Iter=385, loss=1.4767, rmse=223.4303, time=105.6160,	Val RMSE=17.7786
+Iter=386, loss=1.4755, rmse=214.9776, time=122.2246,	Val RMSE=17.7905
+Iter=387, loss=1.4742, rmse=204.1063, time=138.7493,	Val RMSE=17.8020
+Iter=388, loss=1.4732, rmse=219.8952, time=155.1988,	Val RMSE=17.8005
+Iter=389, loss=1.4722, rmse=218.4246, time=154.8901,	Val RMSE=17.8074
+Iter=390, loss=1.4712, rmse=219.5118, time=154.5909,	Val RMSE=17.8043
+Iter=391, loss=1.4701, rmse=217.0793, time=170.8793,	Val RMSE=17.7825
+Iter=392, loss=1.4691, rmse=218.6828, time=171.9368,	Val RMSE=17.7480
+Iter=393, loss=1.4680, rmse=205.9379, time=171.5566,	Val RMSE=17.7201
+Iter=394, loss=1.4669, rmse=206.5510, time=171.2076,	Val RMSE=17.7033, Test RMSE=18.3256
+Iter=395, loss=1.4662, rmse=241.7924, time=170.8550,	Val RMSE=17.7028, Test RMSE=18.3338
+Iter=396, loss=1.4651, rmse=208.5039, time=170.5017,	Val RMSE=17.7126
+Iter=397, loss=1.4639, rmse=216.6551, time=186.4982,	Val RMSE=17.7337
+Iter=398, loss=1.4629, rmse=219.4371, time=202.3951,	Val RMSE=17.7597
+Iter=399, loss=1.4618, rmse=223.9096, time=201.9369,	Val RMSE=17.7853
+Iter=400, loss=1.4607, rmse=209.0462, time=217.7512,	Val RMSE=17.7981
+Iter=401, loss=1.4597, rmse=222.6161, time=233.4704,	Val RMSE=17.8021
+Iter=402, loss=1.4586, rmse=205.0170, time=247.9483,	Val RMSE=17.8061
+Iter=403, loss=1.4576, rmse=226.5519, time=247.3949,	Val RMSE=17.8009
+Iter=404, loss=1.4567, rmse=222.2540, time=246.8898,	Val RMSE=17.8116
+Iter=405, loss=1.4557, rmse=225.7400, time=246.3529,	Val RMSE=17.8289
+Iter=406, loss=1.4546, rmse=214.4942, time=245.8412,	Val RMSE=17.8394
+Iter=407, loss=1.4535, rmse=208.7534, time=245.3118,	Val RMSE=17.8498
+Iter=408, loss=1.4527, rmse=235.1077, time=244.8075,	Val RMSE=17.8671
+Iter=409, loss=1.4516, rmse=219.9741, time=244.2789,	Val RMSE=17.8786
+Iter=410, loss=1.4505, rmse=201.2834, time=243.7547,	Val RMSE=17.8800
+Iter=411, loss=1.4494, rmse=220.5187, time=243.2425,	Val RMSE=17.8760
+Iter=412, loss=1.4484, rmse=213.6890, time=242.7198,	Val RMSE=17.8739
